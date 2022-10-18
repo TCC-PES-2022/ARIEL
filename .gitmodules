@@ -2,3 +2,7 @@
 	path = ARIEL/modules/CommunicationManager
 	url = https://github.com/TCC-PES-2022/CommunicationManager.git
 	branch = main
+[submodule "ARIEL/modules/ImageManager"]
+	path = ARIEL/modules/ImageManager
+	url = https://github.com/TCC-PES-2022/ImageManager.git
+	branch = main
