@@ -1,0 +1,4 @@
+[submodule "ARIEL/modules/CommunicationManager"]
+	path = ARIEL/modules/CommunicationManager
+	url = https://github.com/TCC-PES-2022/CommunicationManager.git
+	branch = main
