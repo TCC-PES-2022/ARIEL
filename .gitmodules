@@ -6,3 +6,7 @@
 	path = ARIEL/modules/ImageManager
 	url = https://github.com/TCC-PES-2022/ImageManager.git
 	branch = main
+[submodule "ARIEL/modules/LogManager"]
+	path = ARIEL/modules/LogManager
+	url = https://github.com/TCC-PES-2022/LogManager.git
+	branch = main
