@@ -10,3 +10,7 @@
 	path = ARIEL/modules/LogManager
 	url = https://github.com/TCC-PES-2022/LogManager.git
 	branch = main
+[submodule "ARIEL/modules/authentication"]
+	path = ARIEL/modules/authentication
+	url = https://github.com/TCC-PES-2022/authentication.git
+	branch = master
