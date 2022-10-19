@@ -22,12 +22,12 @@ make deps DESTDIR=$INSTALL_PATH && make -j$(nproc) DESTDIR=$INSTALL_PATH && make
 # Build LogManager
 cd ../
 cd LogManager
-make lib -j$(nproc) && make move
+make slib -j$(nproc) && make smove DESTDIR=$INSTALL_PATH
 
 # Build Authenticator
 cd ../
 cd authentication
-make lib -j$(nproc) && make move
+make slib -j$(nproc) && make smove DESTDIR=$INSTALL_PATH
 
 # Return to root directory
 cd ../..
