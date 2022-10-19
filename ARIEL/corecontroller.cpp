@@ -25,21 +25,41 @@ void CoreController::start()
     iniciar_UI_interface(&img_controler, &aut_controler, &con_controler, UI__CTL);
 
     this->isRun=true;
-
+    uint8_t tmp = 0;
     while (this->isRun) {
+        //Verifica se existe mensagem na fila de mensagens do controlador
         val = verificarFilas(&img_controler, &aut_controler, &con_controler, UI__CTL);
+
         switch (val) {
-		case RP_fila_autenticacao:
-		    aut_controler.byte_controle = UI_Aguardar;
+        case RP_fila_autenticacao: // a struct aut_controler foi atualizada pelo usuário
+            if(aut_controler.byte_controle == UI_EnviarLogin) // Requisitado autenticação do login
+            {
+//                printf("RETURN: %d\n", login((char*)aut_controler.autenticao.login,
+//                                             (char*) aut_controler.autenticao.senha));
+                tmp = login((char*)aut_controler.autenticao.login,
+                                    (char*) aut_controler.autenticao.senha);
+                if (tmp == AU_AUTHENTICATION_OK)
+                    aut_controler = *verificar_autenticacao_Controler(UI_Ok,
+                                                                  &aut_controler);
+                else
+                    aut_controler = *verificar_autenticacao_Controler(UI_Falha,
+                                                                  &aut_controler);
+            }
+            else if (aut_controler.byte_controle == UI_Cadastrar) // Requisitado cadastrar novo usuario
+            {
 
-		    printf("RETURN: %d\n", login((char*)aut_controler.autenticao.login,
-		    (char*) aut_controler.autenticao.senha));
+            }
+            else if (aut_controler.byte_controle == UI_RemoverUsuario) // Requisitado remover usuario
+            {
 
-		    aut_controler = *verificar_autenticacao_Controler(UI_Ok,
-		    &aut_controler);
-
+            }
+            else
+            {
+                //Comando inválido
+                aut_controler = *verificar_autenticacao_Controler(UI_Falha,&aut_controler);
+            }
 		    break;
-		case RP_fila_conexao:
+        case RP_fila_conexao: // a struct con_controler foi atualizada pelo usuário
 			if (con_controler.byte_controle == UI_EstabelecerConexao) {
 				create_handler(&handler);		
 				set_tftp_dataloader_server_port(handler, 5959);
