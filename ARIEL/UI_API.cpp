@@ -67,6 +67,14 @@ st_ui_image* carregar_imagem_GUI(uint8_t cmd_controle, st_ui_image* val)
         fila_imagem_Controler.push(tmp);
         tmp.byte_controle = UI_Aguardar;
         break;
+    case UI_Apagar_Aquivo:
+        ui_api_debug("+[GUI][MQ] : Comando UI_Apagar_Aquivo");
+        tmp = *val;
+        tmp.byte_controle = cmd_controle;
+        tmp.byte_controle_anterior = cmd_controle;
+        fila_imagem_Controler.push(tmp);
+        tmp.byte_controle = UI_Aguardar;
+        break;
     case UI_Cancelar:
         ui_api_debug("+[GUI][MQ] : Comando UI_Cancelar");
         tmp = *val;
@@ -135,6 +143,13 @@ st_ui_image* carregar_imagem_Controler(uint8_t cmd_controle, st_ui_image* val)
         break;
     case UI_Informacoes_Imagem:
         ui_api_debug("+[CTL][MQ] : Comando UI_Informacoes_Imagem");
+        tmp = *val;
+        tmp.byte_controle = cmd_controle;
+        fila_imagem_GUI.push(tmp);
+        tmp.byte_controle = UI_Aguardar;
+        break;
+    case UI_Apagar_Aquivo:
+        ui_api_debug("+[CTL][MQ] : Comando UI_Apagar_Aquivo");
         tmp = *val;
         tmp.byte_controle = cmd_controle;
         fila_imagem_GUI.push(tmp);
