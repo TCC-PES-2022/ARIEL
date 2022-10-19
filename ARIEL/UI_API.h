@@ -21,7 +21,7 @@ enum UI_RESP {
 	RP_fila_imagem = 1,
 	RP_fila_transf_imagem = 2,
 	RP_fila_autenticacao = 3,
-	RP_fila_conexao = 4,
+    RP_fila_conexao = 4,
 };
 enum  UI_INTERFACE {
 
@@ -31,12 +31,13 @@ enum  UI_INTERFACE {
 	UI_Aguardar = 3,
 	UI_Null = 0,
     //Imagem
-	UI_Iniciar_Transferencia = 5,
+    UI_Iniciar_Transferencia = 5,    // INICIAR A TRANSFERENCIA DO ARQUIVO SELECIONADO
 	UI_Andamento_Transferencia = 6,
 	UI_Cancelar = 7,
 	UI_Fim_Transferencia = 8,
-	UI_Carregar_Imagem = 9,
-	UI_Informacoes_Imagem = 10,
+    UI_Carregar_Imagem = 9,         // ENVIAR DO PEN-DRIVE PARA A PASTA DE IMAGENS
+    UI_Informacoes_Imagem = 10,     // LISTAR IMAGENS DENTRO DO PROJETO
+    UI_Apagar_Aquivo,               // APAGAR A IMAGEM DENTRO DO PROJETO
     //Autenticacao
 	UI_EnviarLogin = 11,
     UI_Cadastrar = 12,
