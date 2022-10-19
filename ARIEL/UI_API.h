@@ -57,8 +57,8 @@ enum  UI_INTERFACE {
 
 // Estrutura destinada à informações sobre o Diretório
 typedef struct st_dir_img {
-    char *diretorio_img; // Diretorio da imagem
-    char *diretorio_cmp; // Diretorio do arquivo de compatibilidade
+    char *diretorio_img[TAM_MAX_LIST]; // Diretorio da imagem
+    char *diretorio_cmp[TAM_MAX_LIST]; // Diretorio do arquivo de compatibilidade
     uint16_t tam_dir;
 }st_dir_img;
 
@@ -78,7 +78,7 @@ typedef struct st_ui_image {
     st_dir_img dir_img; // diretorio a ser enviado para a pasta
     uint16_t status_transferencia; // 0 - 1000 (1 CASA DECIMAL DE PRECISÃO)
     st_info_img img_info; // ESTRUTURA QUE CONTERÁ A LISTA DE IMAGENS DENTRO DO DIRETORIO
-
+    char *apagar_pn; // PN para ser apagado
 }st_ui_image;
 
 ///\\  //\\  //\\  //\\  //\\  //\\  //\\  //\\  //\\  //\\  //\\  //\\  //\\  //\\  //\\  //\\  //\\  //\\  //\\  //\\  //\\  //\\  //\\ 
@@ -86,8 +86,11 @@ typedef struct st_ui_image {
 
 // Estrutura Das informações sobre a conexao
 typedef struct st_info_conexao {
-	
-
+    char *hardware_id;
+    char *hardware_pos;
+    char *hardware_ip;
+    uint32_t dataloader_server_port;
+    uint32_t targethardware_server_port;
 }st_info_conexao_ty;
 // Estrutura Geral da Conexao
 typedef struct st_ui_conexao {
