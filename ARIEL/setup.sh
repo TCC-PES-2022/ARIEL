@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-touch ~/.bashrc
-echo "export DESTDIR=~/pes" >> ~/.bashrc
+INSTALL_PATH=$HOME/pes
 
-git submodule update --init --recursive
+git submodule init
+git submodule update --recursive --remote
 
 sudo apt update
 sudo apt install -y --allow-downgrades build-essential=12.9ubuntu3 libcjson-dev=1.7.15-1 libgcrypt20-dev=1.9.4-3ubuntu3 openssl=3.0.2-0ubuntu1 libtinyxml2-dev=9.0.0+dfsg-3
@@ -12,15 +12,22 @@ sudo apt install -y libgtest-dev=1.11.0-3 cmake-data=3.22.1-1ubuntu1 cmake=3.22.
 
 # Build CommunicationManager
 cd modules/CommunicationManager
-make deps && make -j$(nproc)
+make deps DESTDIR=$INSTALL_PATH && make -j$(nproc) DESTDIR=$INSTALL_PATH && make install DESTDIR=$INSTALL_PATH
 
 # Build ImageManager
-cd ../..
-cd modules/ImageManager
-make deps && make -j$(nproc)
+cd ../
+cd ImageManager
+make deps DESTDIR=$INSTALL_PATH && make -j$(nproc) DESTDIR=$INSTALL_PATH && make install DESTDIR=$INSTALL_PATH
 
 # Build LogManager
-# TODO
+cd ../
+cd LogManager
+make lib -j$(nproc) && make move
 
 # Build Authenticator
-#TODO
+cd ../
+cd authentication
+make lib -j$(nproc) && make move
+
+# Return to root directory
+cd ../..
