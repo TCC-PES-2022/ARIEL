@@ -10,18 +10,8 @@ sudo apt install -y --allow-downgrades build-essential=12.9ubuntu3 libcjson-dev=
 
 sudo apt install -y libgtest-dev=1.11.0-3 cmake-data=3.22.1-1ubuntu1 cmake=3.22.1-1ubuntu1 lcov=1.15-1
 
-# Build CommunicationManager
-cd modules/CommunicationManager
-make deps DESTDIR=$INSTALL_PATH && make -j$(nproc) DESTDIR=$INSTALL_PATH && make install DESTDIR=$INSTALL_PATH
-
-# Build ImageManager
-cd ../
-cd ImageManager
-make deps DESTDIR=$INSTALL_PATH && make -j$(nproc) DESTDIR=$INSTALL_PATH && make install DESTDIR=$INSTALL_PATH
-
 # Build LogManager
-cd ../
-cd LogManager
+cd modules/LogManager
 make slib -j$(nproc) && make smove DESTDIR=$INSTALL_PATH
 
 # Build Authenticator
@@ -29,9 +19,20 @@ cd ../
 cd authentication
 make slib -j$(nproc) && make smove DESTDIR=$INSTALL_PATH
 
+# Build UI_API
 cd ../
 cd UI_API
 make deps DESTDIR=$INSTALL_PATH
+
+# Build CommunicationManager
+cd ../
+cd CommunicationManager
+make deps DESTDIR=$INSTALL_PATH && make -j$(nproc) DESTDIR=$INSTALL_PATH && make install DESTDIR=$INSTALL_PATH
+
+# Build ImageManager
+cd ../
+cd ImageManager
+make deps DESTDIR=$INSTALL_PATH && make -j$(nproc) DESTDIR=$INSTALL_PATH && make install DESTDIR=$INSTALL_PATH
 
 # Return to root directory
 cd ../..
