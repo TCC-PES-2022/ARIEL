@@ -1,16 +1,18 @@
-[submodule "ARIEL/modules/CommunicationManager"]
-	path = ARIEL/modules/CommunicationManager
+[submodule "modules/CommunicationManager"]
+	path = modules/CommunicationManager
 	url = https://github.com/TCC-PES-2022/CommunicationManager.git
 	branch = main
-[submodule "ARIEL/modules/ImageManager"]
-	path = ARIEL/modules/ImageManager
+[submodule "modules/ImageManager"]
+	path = modules/ImageManager
 	url = https://github.com/TCC-PES-2022/ImageManager.git
 	branch = main
-[submodule "ARIEL/modules/LogManager"]
-	path = ARIEL/modules/LogManager
-	url = https://github.com/TCC-PES-2022/LogManager.git
+[submodule "modules/LogManager"]
+	path = modules/LogManager
+	url = https://github.com/TCC-PES-2022/LogManager
 	branch = main
-[submodule "ARIEL/modules/authentication"]
-	path = ARIEL/modules/authentication
+[submodule "modules/authentication"]
+	path = modules/authentication
 	url = https://github.com/TCC-PES-2022/authentication.git
-	branch = master
+[submodule "modules/UI_API"]
+	path = modules/UI_API
+	url = https://github.com/TCC-PES-2022/UI_API.git
