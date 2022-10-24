@@ -2,8 +2,7 @@
 
 INSTALL_PATH=$HOME/pes
 
-git submodule init
-git submodule update --recursive --remote
+git submodule update --init --recursive --remote
 
 sudo apt update
 sudo apt install -y --allow-downgrades build-essential=12.9ubuntu3 libcjson-dev=1.7.15-1 libgcrypt20-dev=1.9.4-3ubuntu3 openssl=3.0.2-0ubuntu1 libtinyxml2-dev=9.0.0+dfsg-3
