@@ -1,8 +1,0 @@
-/home/ota/ARIEL/build/CMakeFiles/GUI.dir
-/home/ota/ARIEL/build/CMakeFiles/edit_cache.dir
-/home/ota/ARIEL/build/CMakeFiles/rebuild_cache.dir
-/home/ota/ARIEL/build/CMakeFiles/list_install_components.dir
-/home/ota/ARIEL/build/CMakeFiles/install.dir
-/home/ota/ARIEL/build/CMakeFiles/install/local.dir
-/home/ota/ARIEL/build/CMakeFiles/install/strip.dir
-/home/ota/ARIEL/build/CMakeFiles/GUI_autogen.dir
