@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 INSTALL_PATH=$HOME/pes
+mkdir -p $INSTALL_PATH
 
 git submodule update --init --recursive --remote
 
@@ -40,5 +41,7 @@ cd ../
 cd ImageManager
 make deps DESTDIR=$INSTALL_PATH && make -j$(nproc) DESTDIR=$INSTALL_PATH && make install DESTDIR=$INSTALL_PATH
 
-# Return to root directory
+# Install certificate
+mkdir -p $INSTALL_PATH/certificate
 cd ../..
+cp certificate/* $INSTALL_PATH/certificate
