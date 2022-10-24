@@ -45,3 +45,9 @@ make deps DESTDIR=$INSTALL_PATH && make -j$(nproc) DESTDIR=$INSTALL_PATH && make
 mkdir -p $INSTALL_PATH/certificate
 cd ../..
 cp certificate/* $INSTALL_PATH/certificate
+
+# Create log directory
+mkdir -p $INSTALL_PATH/log
+
+#create users directory
+mkdir -p $INSTALL_PATH/users
