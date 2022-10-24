@@ -3,7 +3,7 @@
 
 #include "corecontroller.h"
 #include "iauthentication.h"
-#include "communication_api.h"
+#include "icommunicationmanager.h"
 #include "ilogger.h"
 
 CoreController::CoreController(QObject *parent)
