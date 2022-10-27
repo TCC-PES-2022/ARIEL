@@ -11,63 +11,106 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>ARIEL</string>
+   <string>ARIEL v1.0.0</string>
   </property>
   <property name="windowIcon">
    <iconset resource="rsc_file.qrc">
-    <normaloff>:/img/Ariel/img/Ariel2.png</normaloff>:/img/Ariel/img/Ariel2.png</iconset>
+    <normaloff>:/Ariel/img/Ariel/Icon.png</normaloff>:/Ariel/img/Ariel/Icon.png</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(163,181,191);
+border-top-color: rgb(0, 85, 255);</string>
+  </property>
+  <property name="iconSize">
+   <size>
+    <width>30</width>
+    <height>30</height>
+   </size>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>250</x>
-      <y>30</y>
-      <width>241</width>
-      <height>161</height>
+      <x>150</x>
+      <y>60</y>
+      <width>491</width>
+      <height>151</height>
      </rect>
     </property>
     <property name="text">
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap resource="rsc_file.qrc">:/img/Ariel/img/Ariel1.png</pixmap>
+     <pixmap resource="rsc_file.qrc">:/Ariel/img/Ariel/Logo.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
     </property>
    </widget>
+   <widget class="QPushButton" name="btn_login">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>380</y>
+      <width>411</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI</family>
+      <pointsize>14</pointsize>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(0, 0, 255);
+border-radius:20px;
+font: 700 9pt &quot;Segoe UI&quot;;
+color: rgb(255, 255, 255);
+font: 14pt &quot;Segoe UI&quot;;
+</string>
+    </property>
+    <property name="text">
+     <string>ENTRAR</string>
+    </property>
+   </widget>
    <widget class="QLineEdit" name="txt_userName">
     <property name="geometry">
      <rect>
-      <x>150</x>
-      <y>240</y>
-      <width>461</width>
-      <height>28</height>
+      <x>200</x>
+      <y>260</y>
+      <width>411</width>
+      <height>41</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(0, 0, 255);
+border-radius:20px;
+background-color: rgb(222,233,239);
+font: 12pt &quot;Segoe UI&quot;;
+text-align: center;</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="txt_password">
     <property name="geometry">
      <rect>
-      <x>150</x>
-      <y>280</y>
-      <width>461</width>
-      <height>28</height>
+      <x>200</x>
+      <y>320</y>
+      <width>411</width>
+      <height>41</height>
      </rect>
     </property>
-   </widget>
-   <widget class="QPushButton" name="btn_login">
-    <property name="geometry">
-     <rect>
-      <x>160</x>
-      <y>340</y>
-      <width>441</width>
-      <height>30</height>
-     </rect>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(0, 0, 255);
+border-radius:20px;
+background-color: rgb(222,233,239);
+font: 12pt &quot;Segoe UI&quot;;
+text-align: center;</string>
     </property>
-    <property name="text">
-     <string>Entrar</string>
+    <property name="echoMode">
+     <enum>QLineEdit::Password</enum>
     </property>
    </widget>
   </widget>
@@ -77,7 +120,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

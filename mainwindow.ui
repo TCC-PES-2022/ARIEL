@@ -6,34 +6,28 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>866</width>
-    <height>657</height>
+    <width>869</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>ARIEL</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="rsc_file.qrc">
+    <normaloff>:/Ariel/img/Ariel/Icon.png</normaloff>:/Ariel/img/Ariel/Icon.png</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(163,181,191);</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>30</y>
-      <width>181</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Arquivos de Imagens</string>
-    </property>
-   </widget>
    <widget class="QScrollArea" name="scrollArea">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>60</y>
-      <width>651</width>
-      <height>291</height>
+      <x>10</x>
+      <y>40</y>
+      <width>621</width>
+      <height>241</height>
      </rect>
     </property>
     <property name="widgetResizable">
@@ -44,18 +38,21 @@
       <rect>
        <x>0</x>
        <y>0</y>
-       <width>649</width>
-       <height>289</height>
+       <width>619</width>
+       <height>239</height>
       </rect>
      </property>
-     <widget class="QTreeWidget" name="tw_imgFile">
+     <widget class="QTreeWidget" name="tw_fileImage">
       <property name="geometry">
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>651</width>
-        <height>291</height>
+        <width>621</width>
+        <height>241</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(222,233,239);</string>
       </property>
       <column>
        <property name="text">
@@ -65,65 +62,47 @@
      </widget>
     </widget>
    </widget>
-   <widget class="QPushButton" name="btn_addImg">
+   <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>660</x>
-      <y>70</y>
-      <width>201</width>
-      <height>30</height>
+      <x>10</x>
+      <y>15</y>
+      <width>251</width>
+      <height>21</height>
      </rect>
     </property>
-    <property name="text">
-     <string>Adicionar Imagem</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="btn_remove_Img">
-    <property name="geometry">
-     <rect>
-      <x>660</x>
-      <y>110</y>
-      <width>201</width>
-      <height>30</height>
-     </rect>
+    <property name="styleSheet">
+     <string notr="true">font: 700 12pt &quot;Segoe UI&quot;;
+color: rgb(0, 0, 127);</string>
     </property>
     <property name="text">
-     <string>Excluir Imagem</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="btn_transferImg">
-    <property name="geometry">
-     <rect>
-      <x>660</x>
-      <y>160</y>
-      <width>201</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Transferir Imagem</string>
+     <string>Arquivos de Imagens</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>380</y>
-      <width>221</width>
+      <y>310</y>
+      <width>301</width>
       <height>21</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">font: 700 12pt &quot;Segoe UI&quot;;
+color: rgb(0, 0, 127);</string>
+    </property>
     <property name="text">
-     <string>Transferência de Imagens</string>
+     <string>Transferência de imagens</string>
     </property>
    </widget>
    <widget class="QScrollArea" name="scrollArea_2">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>410</y>
-      <width>651</width>
-      <height>151</height>
+      <y>340</y>
+      <width>621</width>
+      <height>181</height>
      </rect>
     </property>
     <property name="widgetResizable">
@@ -134,18 +113,21 @@
       <rect>
        <x>0</x>
        <y>0</y>
-       <width>649</width>
-       <height>149</height>
+       <width>619</width>
+       <height>179</height>
       </rect>
      </property>
-     <widget class="QTreeWidget" name="tw_transferImg">
+     <widget class="QTreeWidget" name="tw_transferFile">
       <property name="geometry">
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>651</width>
-        <height>151</height>
+        <width>621</width>
+        <height>192</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(222,233,239);</string>
       </property>
       <column>
        <property name="text">
@@ -155,18 +137,89 @@
      </widget>
     </widget>
    </widget>
-   <widget class="QPushButton" name="btn_cancelTransfer">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>670</x>
-      <y>460</y>
-      <width>191</width>
-      <height>30</height>
+      <x>650</x>
+      <y>60</y>
+      <width>201</width>
+      <height>124</height>
      </rect>
     </property>
-    <property name="text">
-     <string>Cancelar </string>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QPushButton" name="btn_addImage">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(16,6,144);
+color: rgb(255, 255, 255);
+font: 700 14pt &quot;Segoe UI&quot;;</string>
+       </property>
+       <property name="text">
+        <string>Adicionar</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btn_transferImage">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(16,6,144);
+color: rgb(255, 255, 255);
+font: 700 14pt &quot;Segoe UI&quot;;</string>
+       </property>
+       <property name="text">
+        <string>Transferir</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btn_deleteImage">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(16,6,144);
+color: rgb(255, 255, 255);
+font: 700 14pt &quot;Segoe UI&quot;;</string>
+       </property>
+       <property name="text">
+        <string>Excluir</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="layoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>650</x>
+      <y>360</y>
+      <width>201</width>
+      <height>111</height>
+     </rect>
     </property>
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <item>
+      <widget class="QPushButton" name="btn_cancelTransfer">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(16,6,144);
+color: rgb(255, 255, 255);
+font: 700 14pt &quot;Segoe UI&quot;;</string>
+       </property>
+       <property name="text">
+        <string>Cancelar</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_5">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(16,6,144);
+color: rgb(255, 255, 255);
+font: 700 14pt &quot;Segoe UI&quot;;</string>
+       </property>
+       <property name="text">
+        <string>Staus Geral</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -174,13 +227,15 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>866</width>
+     <width>869</width>
      <height>26</height>
     </rect>
    </property>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources/>
+ <resources>
+  <include location="rsc_file.qrc"/>
+ </resources>
  <connections/>
 </ui>

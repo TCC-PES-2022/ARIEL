@@ -1,16 +1,20 @@
 <RCC>
-    <qresource prefix="/img/Ariel">
-        <file>img/Ariel1.png</file>
-        <file>img/Ariel2.png</file>
-        <file>img/Ariel3.png</file>
-        <file>img/Ariel4.png</file>
-        <file>img/Ariel5.png</file>
+    <qresource prefix="/icon">
+        <file>img/icon/Dir_blue_Icon.png</file>
+        <file>img/icon/FileISO_ICON.png</file>
+        <file>img/icon/Icon_xml.png</file>
+        <file>img/icon/uploadFileIcon.png</file>
+        <file>img/icon/failure_icon.png</file>
     </qresource>
-    <qresource prefix="/img/Embraer">
-        <file>img/Embraer_E2.jpg</file>
+    <qresource prefix="/Ariel">
+        <file>img/Ariel/Alt5.png</file>
+        <file>img/Ariel/Icon.png</file>
+        <file>img/Ariel/icon_launch.png</file>
+        <file>img/Ariel/Logo.png</file>
+        <file>img/Ariel/Logo_title.png</file>
+        <file>img/Ariel/Spalhs_Screen.png</file>
     </qresource>
-    <qresource prefix="/img/icon">
-        <file>img/Dir_blue_Icon.png</file>
-        <file>img/FileISO_ICON.png</file>
+    <qresource prefix="/Embraer">
+        <file>img/Embraer/Embraer_E2.jpg</file>
     </qresource>
 </RCC>

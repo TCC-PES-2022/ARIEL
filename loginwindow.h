@@ -2,7 +2,8 @@
 #define LOGINWINDOW_H
 
 #include <QMainWindow>
-#include "UI_API.h"
+#include "dialog_failure.h"
+#include "mainwindow.h"
 #include "usermanager.h"
 
 namespace Ui {
@@ -19,14 +20,26 @@ public:
 
 signals:
      void loginSucessAuthentication();
+
 public slots:
      void updateAuthenticationRequest(int authenticationResponse);
+
+
 private slots:
-     void on_btn_login_clicked();
+
+    //void updateAuthenticationRequest(int authenticationResponse);
+    void on_txt_userName_textChanged(const QString &arg1);
+
+    void on_txt_password_textChanged(const QString &arg1);
+
+    void on_btn_login_clicked();
 
 private:
     Ui::LoginWindow *ui;
     userManager usermanger;
+    Dialog_failure *dialog_falilure;
+    QMainWindow *mainScreen;
+    void setUpInterface();
 };
 
 #endif // LOGINWINDOW_H

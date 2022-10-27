@@ -18,23 +18,33 @@ find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 
 set(PROJECT_SOURCES
-	mainwindow.h
+
 	corecontroller.h
 	coregui.h
-	dialog_searchfile.h
-	loginwindow.h
-	usermanager.h
+        usermanager.h
         main.cpp
-        loginwindow.cpp
-        mainwindow.cpp
         corecontroller.cpp
         coregui.cpp
-	dialog_searchfile.cpp
-	usermanager.cpp
+        usermanager.cpp
+        loginwindow.cpp
         loginwindow.ui
+        loginwindow.h
+        dialog_failure.cpp
+        dialog_failure.h
+        dialog_failure.ui
+        mainwindow.h
+        mainwindow.cpp
         mainwindow.ui
-	dialog_searchfile.ui
+        dialog_selectimage_file.cpp
+        dialog_selectimage_file.h
+        dialog_selectimage_file.ui
+        dialog_filemanager.cpp
+        dialog_filemanager.h
+        dialog_filemanager.ui
+        imagefileoperationmanager.cpp
+        imagefileoperationmanager.h
         rsc_file.qrc
+
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
