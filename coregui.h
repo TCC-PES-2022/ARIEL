@@ -9,7 +9,7 @@
 
 static st_ui_aut auteticationGUI;                // Struct for authentication status managing
 static st_ui_conexao conexaoGUI;
-
+static st_ui_image imagemGUI;
 class CoreGUI : public QObject
 {
     Q_OBJECT

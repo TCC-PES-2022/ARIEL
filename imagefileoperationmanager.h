@@ -13,7 +13,7 @@ signals:
 
 public:
     QStringList getImageFileList();
-
+    void setImagePath(QString imgPath,QString cmpPath);
 };
 
 #endif // IMAGEFILEOPERATIONMANAGER_H

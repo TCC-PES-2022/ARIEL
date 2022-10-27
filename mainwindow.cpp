@@ -147,8 +147,7 @@ void MainWindow::showImageFileList()
 
 void MainWindow::filesSelected(QString imagePath, QString compatibilityFilePath)
 {
+    imageManager->setImagePath(imagePath,compatibilityFilePath);
 
-    qDebug()<<"image selected path "<<imagePath;
-    qDebug()<<"Compatibility file path selected "<<compatibilityFilePath;
 }
 

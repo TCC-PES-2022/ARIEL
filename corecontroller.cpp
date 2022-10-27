@@ -35,16 +35,21 @@ void CoreController::start()
         case RP_fila_autenticacao: // a struct aut_controler foi atualizada pelo usuário
             if(aut_controler.byte_controle == UI_EnviarLogin) // Requisitado autenticação do login
             {
-                //                printf("RETURN: %d\n", login((char*)aut_controler.autenticao.login,
-                //                                             (char*) aut_controler.autenticao.senha));
+
                 tmp = login((char*)aut_controler.autenticao.login,
                             (char*) aut_controler.autenticao.senha);
-                if (tmp == AU_AUTHENTICATION_OK)
+                if (tmp == AU_AUTHENTICATION_OK){
                     aut_controler = *verificar_autenticacao_Controler(UI_Ok,
                                                                       &aut_controler);
+                    logger(LG_AUTHENTICATION,"%s;%s;",(char*)aut_controler.autenticao.login,"Autenticação Valida");
+                }
                 else
+                {
                     aut_controler = *verificar_autenticacao_Controler(UI_Falha,
                                                                       &aut_controler);
+                    logger(LG_AUTHENTICATION,"%s;%s;",(char*)aut_controler.autenticao.login,"Autenticação Invalida");
+
+                }
             }
             else if (aut_controler.byte_controle == UI_Cadastrar) // Requisitado cadastrar novo usuario
             {
@@ -130,10 +135,12 @@ void CoreController::start()
             if(img_controler.byte_controle == UI_Carregar_Imagem)
             {
                 //TODO - Rotina para carregar imagem
-                // img_controler.dir_img.diretorio_cmp[] <- Caminho do arquivo de compatibilidade
-                // img_controler.dir_img.diretorio_img[] <- Caminho do arquivo de imagem
+                printf("Print Ptr imgPATH CTRL\r\n");
+                printf("%s \r\n",(char*)img_controler.dir_img.diretorio_img);
+                printf("Print Ptr cmpPATH CTRL\r\n");
+                printf("%s \r\n",(char*)img_controler.dir_img.diretorio_cmp);
                 // Qualquer outra informação extra tem que ser comunicada
-                //TODO - Resposta no formato:
+                // TODO - Resposta no formato:
                 // Resposta = UI_Ok ou Resposta = UI_Falha
                 img_controler= *carregar_imagem_Controler(UI_Falha,&img_controler);
             }
