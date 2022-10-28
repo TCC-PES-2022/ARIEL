@@ -70,7 +70,7 @@ else()
     endif()
 endif()
 
-target_link_libraries(GUI PRIVATE Qt${QT_VERSION_MAJOR}::Widgets authentication logger uiapi pthread gcrypt gpg-error communicationmanager arinc615a transfer tftp tftpd blsecurity cjson)
+target_link_libraries(GUI PRIVATE Qt${QT_VERSION_MAJOR}::Widgets authentication logger uiapi pthread gcrypt gpg-error communicationmanager arinc615a transfer tftp tftpd blsecurity cjson imagemanager tinyxml2)
 
 set_target_properties(GUI PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com

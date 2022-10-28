@@ -14,8 +14,9 @@ QStringList ImageFileOperationManager::getImageFileList()
 {
 
     QStringList fileImageList;
-    fileImageList<<"PUY123"<<"EMBRAER234"<<"PES345"<<"UFPE4567";
+    //fileImageList<<"PUY123"<<"EMBRAER234"<<"PES345"<<"UFPE4567";
 
+    imagemGUI =*carregar_imagem_GUI(UI_Informacoes_Imagem,&imagemGUI);
     return fileImageList;
 
 }

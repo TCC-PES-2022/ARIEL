@@ -37,6 +37,8 @@ int main(int argc, char *argv[])
 
     QObject::connect(&loginScreen,&LoginWindow::loginSucessAuthentication,&mainScreen,&MainWindow::show);
 
+    QObject::connect(&coreGui,&CoreGUI::imageFileUpdate,&mainScreen,&MainWindow::updateInterfaceImage);
+
 
         //QObject::connect(&a,&QApplication::aboutToQuit,&coreGui,&CoreGUI::quit);
         //QObject::connect(&a,&QApplication::aboutToQuit,&coreController,&CoreController::quit);

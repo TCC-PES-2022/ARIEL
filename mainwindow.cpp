@@ -57,7 +57,7 @@ void MainWindow::createItemFile(QString partNumber)
     QTreeWidgetItem *treeItem=new QTreeWidgetItem(ui->tw_fileImage);
     treeItem->setText(1,partNumber);
      cBox=new QCheckBox();
-     QObject::connect(cBox,&QCheckBox::stateChanged,this,&MainWindow::on_cBox_stateChanged);
+     QObject::connect(cBox,&QCheckBox::stateChanged,this,&MainWindow::cBox_stateChanged);
      ui->tw_fileImage->setItemWidget(treeItem,0,cBox);
 
 }
@@ -91,7 +91,7 @@ void MainWindow::updateProgressBarrTransferFile(int index, double valor)
 
 
 
-void MainWindow::on_cBox_stateChanged(int state)
+void MainWindow::cBox_stateChanged(int state)
 {
 
     int currentItem=ui->tw_fileImage->indexOfTopLevelItem(ui->tw_fileImage->currentItem());
@@ -116,7 +116,7 @@ void MainWindow::on_btn_transferImage_clicked()
 
             QTreeWidgetItem *treeItem=ui->tw_fileImage->topLevelItem(i);
             cBox=new QCheckBox();
-            QObject::connect(cBox,&QCheckBox::stateChanged,this,&MainWindow::on_cBox_stateChanged);
+            QObject::connect(cBox,&QCheckBox::stateChanged,this,&MainWindow::cBox_stateChanged);
             ui->tw_fileImage->setItemWidget(treeItem,0,cBox);
             selectedFile.replace(i,-1);
             QString nameFile=treeItem->text(1);
@@ -149,5 +149,10 @@ void MainWindow::filesSelected(QString imagePath, QString compatibilityFilePath)
 {
     imageManager->setImagePath(imagePath,compatibilityFilePath);
 
+}
+
+void MainWindow::updateInterfaceImage(char **images, int tam)
+{
+    printf("cheguei");
 }
 

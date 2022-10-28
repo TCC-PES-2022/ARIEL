@@ -5,6 +5,11 @@
 #include <QThread>
 #include "UI_API.h"
 #include <QDebug>
+#include "iimagemanager.h"
+#include "icommunicationmanager.h"
+#include "iauthentication.h"
+//#include "ilogger.h"
+
 
 class CoreController : public QObject
 {
@@ -21,7 +26,9 @@ public slots:
 
 private:
     bool isRun;                     // variável que controlar se a coreController está no loop principal ou não
-
+    ImageHandlerPtr imageHandler;
+    CommunicationHandlerPtr comHandler;
 };
+
 
 #endif // CORECONTROLLER_H

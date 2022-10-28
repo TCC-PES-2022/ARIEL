@@ -21,7 +21,7 @@ public:
 private slots:
     void on_btn_addImage_clicked();
 
-    void on_cBox_stateChanged(int state);
+    void cBox_stateChanged(int state);
 
     void on_btn_transferImage_clicked();
 
@@ -34,7 +34,7 @@ private slots:
 public slots:
     //void updateProgressTransfer();
     //void addNewImageFileResponse(QString filename,bool isAddSuccess);
-
+    void updateInterfaceImage(char **images,int tam);
 private:
     void setUpInterface();
     void createItemFile(QString partNumber);

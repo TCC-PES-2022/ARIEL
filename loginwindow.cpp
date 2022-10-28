@@ -1,6 +1,8 @@
 #include "loginwindow.h"
 #include "ui_loginwindow.h"
 #include <QDebug>
+#include "imagefileoperationmanager.h"
+
 
 LoginWindow::LoginWindow(QWidget *parent) :
     QMainWindow(parent),
