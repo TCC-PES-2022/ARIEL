@@ -8,9 +8,7 @@
 #include "iimagemanager.h"
 #include "icommunicationmanager.h"
 #include "iauthentication.h"
-//#include "ilogger.h"
-
-
+#include "ilogger.h"
 class CoreController : public QObject
 {
     Q_OBJECT

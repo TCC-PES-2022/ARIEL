@@ -57,7 +57,7 @@ void MainWindow::createItemFile(QString partNumber)
     QTreeWidgetItem *treeItem=new QTreeWidgetItem(ui->tw_fileImage);
     treeItem->setText(1,partNumber);
      cBox=new QCheckBox();
-     QObject::connect(cBox,&QCheckBox::stateChanged,this,&MainWindow::cBox_stateChanged);
+     QObject::connect(cBox,&QCheckBox::stateChanged,this,&MainWindow::on_cBox_stateChanged);
      ui->tw_fileImage->setItemWidget(treeItem,0,cBox);
 
 }
@@ -91,40 +91,42 @@ void MainWindow::updateProgressBarrTransferFile(int index, double valor)
 
 
 
-void MainWindow::cBox_stateChanged(int state)
+void MainWindow::on_cBox_stateChanged(int state)
 {
 
     int currentItem=ui->tw_fileImage->indexOfTopLevelItem(ui->tw_fileImage->currentItem());
-    if(state==2){
+    if(state == 2){
         selectedFile.replace(currentItem,currentItem);
     }else{
 
         selectedFile.replace(currentItem,-1);
 
     }
-
-    //qDebug()<< "itens selecionados são "<<selectedFile;
 }
 
 
 void MainWindow::on_btn_transferImage_clicked()
 {
+    QStringList listPN;
+//    sendImageUpload( );
+
     foreach (int i, selectedFile) {
 
         if(i>=0){
-
-
             QTreeWidgetItem *treeItem=ui->tw_fileImage->topLevelItem(i);
             cBox=new QCheckBox();
-            QObject::connect(cBox,&QCheckBox::stateChanged,this,&MainWindow::cBox_stateChanged);
+            QObject::connect(cBox,&QCheckBox::stateChanged,this,&MainWindow::on_cBox_stateChanged);
             ui->tw_fileImage->setItemWidget(treeItem,0,cBox);
             selectedFile.replace(i,-1);
             QString nameFile=treeItem->text(1);
             QString target="FCL";
             createItemTransferFile(nameFile,target);
+            listPN.append(nameFile);
+            //TODO - Colocar a UI_API aqui pra iniciarTransferencia
         }
-    }
 
+    }
+    imageManager->sendImageUpload(listPN);
     ui->tw_fileImage->currentItem()->setSelected(false);
     ui->tw_fileImage->setEnabled(false);
 }
@@ -153,6 +155,13 @@ void MainWindow::filesSelected(QString imagePath, QString compatibilityFilePath)
 
 void MainWindow::updateInterfaceImage(char **images, int tam)
 {
-    printf("cheguei");
+    ui->tw_fileImage->clear();
+    selectedFile.clear();
+    for (int i = 0; i< tam;i++)
+        {
+            QString partNumber = QString::fromUtf8((char*)images[i]);
+            createItemFile(partNumber);
+            selectedFile.push_back(-1);
+        }
 }
 

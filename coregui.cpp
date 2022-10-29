@@ -30,25 +30,43 @@ void CoreGUI::start()
             {
                 emit imageFileUpdate(img_gui.img_info.tabela_de_img,img_gui.img_info.tam);
             }
+            else if(img_gui.byte_controle_anterior == UI_Carregar_Imagem && img_gui.byte_controle == UI_Ok)
+            {
+                printf("\r\nEnviando Solicitação de Imagem \r\n");
+                img_gui =*carregar_imagem_GUI(UI_Informacoes_Imagem,&img_gui);
+            }
 
         }
-        else if (val == 2) {
+        else if (val == RP_fila_transf_imagem) {
             std::cout << "+[GUI] Cmd Recebido " << unsigned(img_gui.byte_controle) << endl;
             std::cout << "+[GUI] Cmd Anterior " << unsigned(img_gui.byte_controle_anterior) << endl;
-            usleep(2000);
 
+            if(img_gui.byte_controle == UI_Andamento_Transferencia){
+                printf("\n Json: %s  ",(char*)img_gui.img_transf.prt_json);
+                fflush(stdout);
+            }
+            else if(img_gui.byte_controle == UI_Fim_Transferencia){
+                printf("\n Status : %d  ",img_gui.img_transf.status_transf);
+                fflush(stdout);
+            }
         }
-        else if (val == 3)
+        else if (val == RP_fila_autenticacao)
         {
             std::cout << "+[GUI] Cmd Recebido " << unsigned(aut_gui.byte_controle) << endl;
             std::cout << "+[GUI] Cmd Anterior " << unsigned(aut_gui.byte_controle_anterior) << endl;
 
-            if(aut_gui.byte_controle_anterior==UI_EnviarLogin){
+            if(aut_gui.byte_controle_anterior == UI_EnviarLogin){
                 std::cout << "+chegou até aqui no while " << endl;
                 emit loginWindowsUpdate(aut_gui.byte_controle);
             }
 
 
+
+        }
+        else if ( val == RP_fila_conexao)
+        {
+            std::cout << "+[GUI] Cmd Recebido " << unsigned(con_gui.byte_controle) << endl;
+            std::cout << "+[GUI] Cmd Anterior " << unsigned(con_gui.byte_controle_anterior) << endl;
         }
 
         sleep(1);

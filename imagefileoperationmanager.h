@@ -14,6 +14,7 @@ signals:
 public:
     QStringList getImageFileList();
     void setImagePath(QString imgPath,QString cmpPath);
+    void sendImageUpload(QStringList  listPN);
 };
 
 #endif // IMAGEFILEOPERATIONMANAGER_H

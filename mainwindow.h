@@ -21,7 +21,7 @@ public:
 private slots:
     void on_btn_addImage_clicked();
 
-    void cBox_stateChanged(int state);
+    void on_cBox_stateChanged(int state);
 
     void on_btn_transferImage_clicked();
 
