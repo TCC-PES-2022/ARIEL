@@ -40,7 +40,7 @@ QJsonObject ImageFileOperationManager::getPartnumberFileInfo(QString partnumber,
 }
 
 
-QStringList ImageFileOperationManager::getImageFileList(QVector<int> imageIndex, QStringList filePN)
+QStringList ImageFileOperationManager::getImageFileList()
 {
 
     QStringList fileImageList;

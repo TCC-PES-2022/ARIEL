@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>869</width>
+    <width>800</width>
     <height>600</height>
    </rect>
   </property>
@@ -67,7 +67,7 @@
      <rect>
       <x>10</x>
       <y>15</y>
-      <width>251</width>
+      <width>171</width>
       <height>21</height>
      </rect>
     </property>
@@ -84,7 +84,7 @@ color: rgb(0, 0, 127);</string>
      <rect>
       <x>10</x>
       <y>310</y>
-      <width>301</width>
+      <width>241</width>
       <height>21</height>
      </rect>
     </property>
@@ -142,8 +142,8 @@ color: rgb(0, 0, 127);</string>
      <rect>
       <x>650</x>
       <y>60</y>
-      <width>201</width>
-      <height>124</height>
+      <width>141</width>
+      <height>121</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -190,7 +190,7 @@ font: 700 14pt &quot;Segoe UI&quot;;</string>
      <rect>
       <x>650</x>
       <y>360</y>
-      <width>201</width>
+      <width>131</width>
       <height>111</height>
      </rect>
     </property>
@@ -221,14 +221,44 @@ font: 700 14pt &quot;Segoe UI&quot;;</string>
      </item>
     </layout>
    </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>530</y>
+      <width>621</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLabel" name="label_3">
+       <property name="styleSheet">
+        <string notr="true">font: 700 12pt &quot;Segoe UI&quot;;
+color: rgb(0, 0, 127);</string>
+       </property>
+       <property name="text">
+        <string>Progresso de transferência</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QProgressBar" name="progressBar">
+       <property name="value">
+        <number>24</number>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>869</width>
-     <height>26</height>
+     <width>800</width>
+     <height>21</height>
     </rect>
    </property>
   </widget>

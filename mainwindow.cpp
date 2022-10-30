@@ -38,8 +38,10 @@ void MainWindow::setUpInterface()
     QStringList labels;
     labels<<"Selecionar"<<"Partnumber";
     ui->tw_fileImage->setHeaderLabels(labels);
-
-
+    ui->progressBar->setRange(0,100);
+    ui->progressBar->setValue(0);
+    
+    
     showImageFileList();
 
 
@@ -92,6 +94,14 @@ void MainWindow::showLoadTransferProgress(QString filesTransferInfo)
 {
     double progress=imageManager->getLoadListRatio(filesTransferInfo);
 
+   if(progress==100){
+      
+      ui->tw_fileimage->setEnabled(true);
+   }
+
+    ui->progressBar->setRange(0,100);
+    ui->progressBar->setValue(progress);
+
     qDebug()<<"Progresso geral= "<<progress;
 }
 
@@ -129,6 +139,8 @@ void MainWindow::on_cBox_stateChanged(int state)
 void MainWindow::on_btn_transferImage_clicked()
 {
     QStringList listPN;
+
+    ui->tw_transferFile->clear();
 //    sendImageUpload( );
 
     foreach (int i, selectedFile) {
@@ -146,6 +158,7 @@ void MainWindow::on_btn_transferImage_clicked()
             QString target="FCL";
             createItemTransferFile(nameFile,target);
             listPN.append(nameFile);
+            fileImageNameList.append(nameFile);
             //TODO - Colocar a UI_API aqui pra iniciarTransferencia
         }
 

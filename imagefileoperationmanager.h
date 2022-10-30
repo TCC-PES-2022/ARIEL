@@ -16,7 +16,7 @@ signals:
 private:
     QJsonObject getPartnumberFileInfo(QString partnumber,QString filesTransferInfo);
 public:
-    QStringList getImageFileList(QVector<int> imageIndex, QStringList filePN);
+    QStringList getImageFileList();
     void setImagePath(QString imgPath,QString cmpPath);
     void sendImageUpload(QStringList  listPN);
     double getLoadListRatio(QString filesTransferInfo);
