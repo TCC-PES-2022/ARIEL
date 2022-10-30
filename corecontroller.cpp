@@ -47,13 +47,13 @@ void CoreController::start()
                 if (tmp == AU_AUTHENTICATION_OK){
                     aut_controler = *verificar_autenticacao_Controler(UI_Ok,
                                                                       &aut_controler);
-                                        logger(LG_AUTHENTICATION,"%s;%s;",(char*)aut_controler.autenticao.login,"Autenticação Valida");
+                    logger(LG_AUTHENTICATION,"%s;%s;",(char*)aut_controler.autenticao.login,"Autenticação Valida");
                 }
                 else
                 {
                     aut_controler = *verificar_autenticacao_Controler(UI_Falha,
                                                                       &aut_controler);
-                                        logger(LG_AUTHENTICATION,"%s;%s;",(char*)aut_controler.autenticao.login,"Autenticação Invalida");
+                    logger(LG_AUTHENTICATION,"%s;%s;",(char*)aut_controler.autenticao.login,"Autenticação Invalida");
 
                 }
             }
@@ -109,13 +109,13 @@ void CoreController::start()
                 {
 
                     img_controler= *carregar_imagem_Controler(UI_Ok,&img_controler);
-                                        logger(LG_IMAGE,"%s;%s;",(char*)aut_controler.autenticao.login,"Imagem Carregada");
+                    logger(LG_IMAGE,"%s;%s;",(char*)aut_controler.autenticao.login,"Imagem Carregada");
 
                 }
                 else
                 {
                     img_controler= *carregar_imagem_Controler(UI_Falha,&img_controler);
-                                        logger(LG_IMAGE,"%s;%s;",(char*)aut_controler.autenticao.login,"Falha na Imagem");
+                    logger(LG_IMAGE,"%s;%s;",(char*)aut_controler.autenticao.login,"Falha na Imagem");
 
                 }
                 // TODO - Resposta no formato:
@@ -164,19 +164,19 @@ void CoreController::start()
                 set_tftp_targethardware_server_port(comHandler, 59595);
                 // Callback TFTP
                 upload_information_status_callback callback = [](CommunicationHandlerPtr handler,
-                                        const char *upload_information_status_json,
-                                        void *context) -> CommunicationOperationResult
-                                {
+                        const char *upload_information_status_json,
+                        void *context) -> CommunicationOperationResult
+                {
 
-                                    st_ui_image *tmp =(st_ui_image*)context;
-                                    if (tmp->img_transf.prt_json != NULL)
-                                    {
-                                        free(tmp->img_transf.prt_json);
-                                    }
-                                    tmp->img_transf.prt_json = strdup(upload_information_status_json);
-                                    tmp =transferir_imagem_Controler(UI_Andamento_Transferencia,tmp);
-                                    return COMMUNICATION_OPERATION_OK;
-                                };
+                    st_ui_image *tmp =(st_ui_image*)context;
+                    if (tmp->img_transf.prt_json != NULL)
+                    {
+                        free(tmp->img_transf.prt_json);
+                    }
+                    tmp->img_transf.prt_json = strdup(upload_information_status_json);
+                    tmp =transferir_imagem_Controler(UI_Andamento_Transferencia,tmp);
+                    return COMMUNICATION_OPERATION_OK;
+                };
                 register_upload_information_status_callback(comHandler, callback, &img_controler);
                 // Set Target
                 set_target_hardware_id(comHandler, "HNPFMS");

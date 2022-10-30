@@ -15,8 +15,32 @@ ImageFileOperationManager::ImageFileOperationManager(QObject *parent)
     }
 }
 
+QJsonObject ImageFileOperationManager::getPartnumberFileInfo(QString partnumber, QString filesTransferInfo)
+{
+    QString key="headerFiles";
+    QJsonDocument qJsonDoc = QJsonDocument::fromJson(filesTransferInfo.toUtf8());
+    QJsonObject obj=qJsonDoc.object();
+    QJsonValue valueJ=obj.value(key);
 
-QStringList ImageFileOperationManager::getImageFileList()
+
+    QJsonArray pnList=valueJ.toArray();
+
+
+    foreach (QJsonValue files, pnList) {
+        QJsonObject file=files.toObject();
+        QJsonValue pn=file.value("loadPartNumberName");
+
+        if(partnumber==pn.toString()){
+            return file;
+        }
+    }
+
+    QJsonObject file_null;
+    return file_null;
+}
+
+
+QStringList ImageFileOperationManager::getImageFileList(QVector<int> imageIndex, QStringList filePN)
 {
 
     QStringList fileImageList;
@@ -45,7 +69,7 @@ void ImageFileOperationManager::sendImageUpload(QStringList listPN)
     int cont = 0;
 
     foreach (QString q, listPN) {
-//        memset(&mtxlistPN[cont],0x0,9*sizeof(char));
+        //        memset(&mtxlistPN[cont],0x0,9*sizeof(char));
         QByteArray ba = q.toLocal8Bit();
         strcpy(mtxlistPN[cont],ba.data());
         cont++;
@@ -58,4 +82,61 @@ void ImageFileOperationManager::sendImageUpload(QStringList listPN)
     }
 
     imagemGUI = *transferir_imagem_GUI(UI_Iniciar_Transferencia,&imagemGUI);
+}
+
+double ImageFileOperationManager::getLoadListRatio(QString filesTransferInfo)
+{
+    QString key="loadListRatio";
+    QJsonDocument qJsonDoc = QJsonDocument::fromJson(filesTransferInfo.toUtf8());
+    QJsonObject obj=qJsonDoc.object();
+    QJsonValue valueJ=obj.value(key);
+
+    double loadListRatio=valueJ.toDouble();
+    return loadListRatio;
+}
+
+double ImageFileOperationManager::getLoadFileRatio(QString partnumber, QString filesTransferInfo)
+{
+    QJsonObject file=getPartnumberFileInfo(partnumber,filesTransferInfo);
+
+    if(file.isEmpty()){
+        return 0;
+    }else{
+        QJsonValue loadFileRatio=file.value("loadRatio");
+        return loadFileRatio.toDouble();
+    }
+}
+
+int ImageFileOperationManager::getNumberOfHeaderFiles(QString filesTransferInfo)
+{
+    QString key="numberOfHeaderFiles";
+    QJsonDocument qJsonDoc = QJsonDocument::fromJson(filesTransferInfo.toUtf8());
+    QJsonObject obj=qJsonDoc.object();
+    QJsonValue valueJ=obj.value(key);
+
+    int loadListRatio=valueJ.toDouble();
+    return loadListRatio;
+}
+
+int ImageFileOperationManager::getUploadOpertationStatusCode(QString filesTransferInfo)
+{
+    QString key="uploadOperationStatusCode";
+    QJsonDocument qJsonDoc = QJsonDocument::fromJson(filesTransferInfo.toUtf8());
+    QJsonObject obj=qJsonDoc.object();
+    QJsonValue valueJ=obj.value(key);
+
+    int loadListRatio=valueJ.toDouble();
+    return loadListRatio;
+}
+
+int ImageFileOperationManager::getLoadFileTransferStatus(QString partnumber, QString filesTransferInfo)
+{
+    QJsonObject file=getPartnumberFileInfo(partnumber,filesTransferInfo);
+
+    if(file.isEmpty()){
+        return 0;
+    }else{
+        QJsonValue loadFileRatio=file.value("loadStatus");
+        return loadFileRatio.toDouble();
+    }
 }

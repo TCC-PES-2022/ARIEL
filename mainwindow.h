@@ -32,14 +32,18 @@ private slots:
 
 
 public slots:
-    //void updateProgressTransfer();
+    void updateProgressTransferList(char *json);
     //void addNewImageFileResponse(QString filename,bool isAddSuccess);
     void updateInterfaceImage(char **images,int tam);
+
 private:
     void setUpInterface();
     void createItemFile(QString partNumber);
     void createItemTransferFile(QString partNumber, QString TargetHardware);
     void updateProgressBarrTransferFile(int index,double valor);
+    void showLoadTransferProgress(QString filesTransferInfo);
+public:
+    void updateProgressTransfer(QString filesTransferInfo);
 
 private:
     Ui::MainWindow *ui;

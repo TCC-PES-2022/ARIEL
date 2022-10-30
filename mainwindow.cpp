@@ -88,6 +88,27 @@ void MainWindow::updateProgressBarrTransferFile(int index, double valor)
     ui->tw_transferFile->setItemWidget(treeItem,2,statusTransfer);
 }
 
+void MainWindow::showLoadTransferProgress(QString filesTransferInfo)
+{
+    double progress=imageManager->getLoadListRatio(filesTransferInfo);
+
+    qDebug()<<"Progresso geral= "<<progress;
+}
+
+void MainWindow::updateProgressTransfer(QString filesTransferInfo)
+{
+    showLoadTransferProgress(filesTransferInfo);
+
+    int count=0;
+    foreach (QString partnumber, fileImageNameList) {
+
+        double loadRatio=imageManager->getLoadFileRatio(partnumber,filesTransferInfo);
+        qDebug() << "\n loadRatio: " << loadRatio << "PartNumber: "<< partnumber;
+        updateProgressBarrTransferFile(count,loadRatio);
+        count++;
+    }
+}
+
 
 
 
@@ -117,6 +138,9 @@ void MainWindow::on_btn_transferImage_clicked()
             cBox=new QCheckBox();
             QObject::connect(cBox,&QCheckBox::stateChanged,this,&MainWindow::on_cBox_stateChanged);
             ui->tw_fileImage->setItemWidget(treeItem,0,cBox);
+            if(selectedFile.at(i) != -1){
+//                fileImageNameList.append()
+            }
             selectedFile.replace(i,-1);
             QString nameFile=treeItem->text(1);
             QString target="FCL";
@@ -153,14 +177,22 @@ void MainWindow::filesSelected(QString imagePath, QString compatibilityFilePath)
 
 }
 
+void MainWindow::updateProgressTransferList(char *json)
+{
+    QString imageStatusList(json);
+    updateProgressTransfer(imageStatusList);
+}
+
 void MainWindow::updateInterfaceImage(char **images, int tam)
 {
     ui->tw_fileImage->clear();
     selectedFile.clear();
+//    fileImageNameList.clear();
     for (int i = 0; i< tam;i++)
         {
             QString partNumber = QString::fromUtf8((char*)images[i]);
             createItemFile(partNumber);
+//            fileImageNameList.append(partNumber);
             selectedFile.push_back(-1);
         }
 }

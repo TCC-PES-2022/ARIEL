@@ -43,6 +43,7 @@ void CoreGUI::start()
 
             if(img_gui.byte_controle == UI_Andamento_Transferencia){
                 printf("\n Json: %s  ",(char*)img_gui.img_transf.prt_json);
+                emit getStatusImageTransfer(img_gui.img_transf.prt_json);
                 fflush(stdout);
             }
             else if(img_gui.byte_controle == UI_Fim_Transferencia){
@@ -59,8 +60,6 @@ void CoreGUI::start()
                 std::cout << "+chegou até aqui no while " << endl;
                 emit loginWindowsUpdate(aut_gui.byte_controle);
             }
-
-
 
         }
         else if ( val == RP_fila_conexao)

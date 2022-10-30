@@ -39,6 +39,7 @@ int main(int argc, char *argv[])
 
     QObject::connect(&coreGui,&CoreGUI::imageFileUpdate,&mainScreen,&MainWindow::updateInterfaceImage);
 
+    QObject::connect(&coreGui,&CoreGUI::getStatusImageTransfer,&mainScreen,&MainWindow::updateProgressTransfer);
 
         //QObject::connect(&a,&QApplication::aboutToQuit,&coreGui,&CoreGUI::quit);
         //QObject::connect(&a,&QApplication::aboutToQuit,&coreController,&CoreController::quit);

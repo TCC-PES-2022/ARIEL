@@ -19,6 +19,7 @@ public:
 signals:
     void loginWindowsUpdate(int authetincationStatus);                   // signal with authentication response for loginWindow GUI update;
     void imageFileUpdate(char **images,int tam);
+    void getStatusImageTransfer(char *json);
 public slots:
      void start();
 
