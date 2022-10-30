@@ -16,6 +16,13 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     setUpInterface();
+
+    //Hide "Excluir" and "Status Geral" buttons
+    ui->btn_deleteImage->hide();
+    ui->pushButton_5->hide();
+
+    ui->btn_transferImage->setEnabled(false);
+
     //QObject::connect(&coreGUI_thread,&QThread::started,&coreGui,&CoreGUI::start);
 
     QObject::connect(ui->btn_cancelTransfer,SIGNAL(clicked()),this,SLOT(btn_cancelTransfer_cliked()));
@@ -132,10 +139,18 @@ void MainWindow::on_cBox_stateChanged(int state)
     if(state == 2){
         selectedFile.replace(currentItem,currentItem);
     }else{
-
         selectedFile.replace(currentItem,-1);
-
     }
+
+    bool enableButton=false;
+    for (int i = 0; i < selectedFile.size(); ++i) {
+        qDebug()<<"selectedFile["<<i<<"]="<<selectedFile[i];
+        if(selectedFile.at(i)!=-1){
+            enableButton=true;
+            break;
+        }
+    }
+    ui->btn_transferImage->setEnabled(enableButton);
 }
 
 
