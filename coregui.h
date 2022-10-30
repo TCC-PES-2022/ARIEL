@@ -20,6 +20,7 @@ signals:
     void loginWindowsUpdate(int authetincationStatus);                   // signal with authentication response for loginWindow GUI update;
     void imageFileUpdate(char **images,int tam);
     void getStatusImageTransfer(char *json);
+    void signalFailTransfer(unsigned char status);
 public slots:
      void start();
 

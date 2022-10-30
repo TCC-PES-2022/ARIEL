@@ -11,7 +11,7 @@ CoreGUI::CoreGUI(QObject *parent)
 
 void CoreGUI::start()
 {
-    uint8_t val_teste = 0;
+    unsigned char val_teste = 0;
     static st_ui_image img_gui;
     static st_ui_aut aut_gui;
     static st_ui_conexao con_gui;
@@ -22,7 +22,7 @@ void CoreGUI::start()
     while (this->isRun)
     {
 
-        uint8_t val = verificarFilas(&img_gui, &aut_gui, &con_gui, UI__GUI);
+        unsigned char val = verificarFilas(&img_gui, &aut_gui, &con_gui, UI__GUI);
         if (val == RP_fila_imagem) {
             std::cout << "+[GUI] Cmd Recebido " << unsigned(img_gui.byte_controle) << endl;
             std::cout << "+[GUI] Cmd Anterior " << unsigned(img_gui.byte_controle_anterior) << endl;
@@ -40,7 +40,7 @@ void CoreGUI::start()
         else if (val == RP_fila_transf_imagem) {
             std::cout << "+[GUI] Cmd Recebido " << unsigned(img_gui.byte_controle) << endl;
             std::cout << "+[GUI] Cmd Anterior " << unsigned(img_gui.byte_controle_anterior) << endl;
-
+            
             if(img_gui.byte_controle == UI_Andamento_Transferencia){
                 printf("\n Json: %s  ",(char*)img_gui.img_transf.prt_json);
                 emit getStatusImageTransfer(img_gui.img_transf.prt_json);
@@ -48,6 +48,7 @@ void CoreGUI::start()
             }
             else if(img_gui.byte_controle == UI_Fim_Transferencia){
                 printf("\n Status : %d  ",img_gui.img_transf.status_transf);
+                emit signalFailTransfer(img_gui.img_transf.status_transf);
                 fflush(stdout);
             }
         }
@@ -70,7 +71,4 @@ void CoreGUI::start()
 
         sleep(1);
     }
-
-
-
 }

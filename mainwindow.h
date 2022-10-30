@@ -25,17 +25,19 @@ private slots:
 
     void on_btn_transferImage_clicked();
 
+    
+
     void showImageFileList();
 
     void filesSelected(QString imagePath,QString compatibilityFilePath);
-
 
 
 public slots:
     void updateProgressTransferList(char *json);
     //void addNewImageFileResponse(QString filename,bool isAddSuccess);
     void updateInterfaceImage(char **images,int tam);
-
+    void alertFailTransfer(unsigned char status);
+     void btn_cancelTransfer_cliked();
 private:
     void setUpInterface();
     void createItemFile(QString partNumber);

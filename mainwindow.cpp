@@ -3,7 +3,8 @@
 #include "dialog_selectimage_file.h"
 #include <QDebug>
 #include "imagefileoperationmanager.h"
-
+#include "UI_API.h"
+#include <QMessageBox>
 
 QVector<int> selectedFile;
 QStringList  fileImageNameList;
@@ -15,6 +16,9 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     setUpInterface();
+    //QObject::connect(&coreGUI_thread,&QThread::started,&coreGui,&CoreGUI::start);
+
+    QObject::connect(ui->btn_cancelTransfer,SIGNAL(clicked()),this,SLOT(btn_cancelTransfer_cliked()));
 }
 
 MainWindow::~MainWindow()
@@ -82,6 +86,8 @@ void MainWindow::createItemTransferFile(QString partNumber, QString TargetHardwa
 
 void MainWindow::updateProgressBarrTransferFile(int index, double valor)
 {
+
+    ui->progressBar->setValue(0);
     QTreeWidgetItem *treeItem=ui->tw_transferFile->topLevelItem(index);
     statusTransfer=new QProgressBar();
     statusTransfer->setRange(0,100);
@@ -94,10 +100,10 @@ void MainWindow::showLoadTransferProgress(QString filesTransferInfo)
 {
     double progress=imageManager->getLoadListRatio(filesTransferInfo);
 
-   if(progress==100){
+   /*if(progress==100){
       
-      ui->tw_fileimage->setEnabled(true);
-   }
+      ui->tw_fileImage->setEnabled(true);
+   }*/
 
     ui->progressBar->setRange(0,100);
     ui->progressBar->setValue(progress);
@@ -118,9 +124,6 @@ void MainWindow::updateProgressTransfer(QString filesTransferInfo)
         count++;
     }
 }
-
-
-
 
 void MainWindow::on_cBox_stateChanged(int state)
 {
@@ -168,6 +171,18 @@ void MainWindow::on_btn_transferImage_clicked()
     ui->tw_fileImage->setEnabled(false);
 }
 
+
+void MainWindow::btn_cancelTransfer_cliked()
+{
+   imageManager->cancelTransferFile();
+   ui->tw_fileImage->setEnabled(true);
+   ui->tw_transferFile->clear();
+}
+
+
+
+
+
 void MainWindow::showImageFileList()
 {
    fileImageNameList = imageManager->getImageFileList();
@@ -192,9 +207,28 @@ void MainWindow::filesSelected(QString imagePath, QString compatibilityFilePath)
 
 void MainWindow::updateProgressTransferList(char *json)
 {
-    QString imageStatusList(json);
-    updateProgressTransfer(imageStatusList);
+
+
+      QString imageStatusList(json);
+      updateProgressTransfer(imageStatusList);
+
+
+    
 }
+
+
+void MainWindow::alertFailTransfer(unsigned char status)
+{
+     if(status==0){
+       QMessageBox msgBox;
+       msgBox.setText("Falha na transferência");
+       msgBox.exec();
+     }
+        ui->tw_fileImage->setEnabled(true);
+     
+}
+
+
 
 void MainWindow::updateInterfaceImage(char **images, int tam)
 {

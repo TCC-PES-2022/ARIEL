@@ -64,6 +64,13 @@ void ImageFileOperationManager::setImagePath(QString imgPath, QString cmpPath)
     imagemGUI = *carregar_imagem_GUI(UI_Carregar_Imagem,&imagemGUI);
 }
 
+void ImageFileOperationManager::cancelTransferFile()
+{
+    imagemGUI = *transferir_imagem_GUI(UI_Cancelar,&imagemGUI);
+}
+
+
+
 void ImageFileOperationManager::sendImageUpload(QStringList listPN)
 {
     int cont = 0;

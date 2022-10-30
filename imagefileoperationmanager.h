@@ -25,6 +25,8 @@ public:
     int getUploadOpertationStatusCode(QString filesTransferInfo);
     int getLoadFileTransferStatus(QString partnumber,QString filesTransferInfo);
 
+    void cancelTransferFile();
+
 };
 
 #endif // IMAGEFILEOPERATIONMANAGER_H

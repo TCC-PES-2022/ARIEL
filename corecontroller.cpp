@@ -32,7 +32,7 @@ void CoreController::start()
     iniciar_UI_interface(&img_controler, &aut_controler, &con_controler, UI__CTL);
 
     this->isRun=true;
-    uint8_t tmp = 0;
+    unsigned char tmp = 0;
     while (this->isRun) {
         //Verifica se existe mensagem na fila de mensagens do controlador
         val = verificarFilas(&img_controler, &aut_controler, &con_controler, UI__CTL);
@@ -159,6 +159,11 @@ void CoreController::start()
         case RP_fila_transf_imagem:
             if (img_controler.byte_controle == UI_Iniciar_Transferencia)
             {
+               // if(img_controler.img_info.tam == 0)
+               // {
+               //     img_controler =*transferir_imagem_Controler(UI_Falha,&img_controler);
+               //     break;
+               // }
                 // Conexao TFTP
                 set_tftp_dataloader_server_port(comHandler, 5959);
                 set_tftp_targethardware_server_port(comHandler, 59595);
@@ -183,6 +188,8 @@ void CoreController::start()
                 set_target_hardware_pos(comHandler, "L");
                 set_target_hardware_ip(comHandler, "127.0.0.1");
 
+                printf("Num of Images: %d\r\n",img_controler.img_info.tam);
+                fflush(stdout);
                 Load *loads = (Load *)malloc((img_controler.img_info.tam+1)*sizeof(Load));
                 for (int i = 0;i<img_controler.img_info.tam;i++){
                     strcpy(loads[i].partNumber, img_controler.img_info.tabela_de_img[i]);
@@ -217,7 +224,8 @@ void CoreController::start()
             else if (img_controler.byte_controle == UI_Cancelar)
             {
                 abort_upload(comHandler,OPERATION_ABORTED_BY_THE_OPERATOR);
-                img_controler =*transferir_imagem_Controler(UI_Ok,&img_controler);
+
+               //img_controler =*transferir_imagem_Controler(UI_Ok,&img_controler);
             }
             break;
         default:
