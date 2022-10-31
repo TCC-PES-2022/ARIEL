@@ -9,6 +9,8 @@
 #include "icommunicationmanager.h"
 #include "iauthentication.h"
 #include "ilogger.h"
+
+using namespace std;
 class CoreController : public QObject
 {
     Q_OBJECT
@@ -26,6 +28,8 @@ private:
     bool isRun;                     // variável que controlar se a coreController está no loop principal ou não
     ImageHandlerPtr imageHandler;
     CommunicationHandlerPtr comHandler;
+    char **images = NULL;
+    int images_size = 0;
 };
 
 

@@ -7,6 +7,7 @@ struct upload_thr{
     CommunicationHandlerPtr comHandler;
     st_ui_image img_controler;
 };
+void *ptrUploadthread(void *ptr);
 
 using namespace std;
 CoreController::CoreController(QObject *parent)
@@ -18,9 +19,6 @@ CoreController::CoreController(QObject *parent)
     printf("%d",rs == IMAGE_OPERATION_OK);
 }
 
-char **images = NULL;
-int images_size = 0;
-void *ptrUploadthread(void *ptr);
 void CoreController::start()
 {
     int opt;
