@@ -94,7 +94,7 @@ void MainWindow::createItemTransferFile(QString partNumber, QString TargetHardwa
 void MainWindow::updateProgressBarrTransferFile(int index, double valor)
 {
 
-    ui->progressBar->setValue(0);
+    // ui->progressBar->setValue(0);
     QTreeWidgetItem *treeItem=ui->tw_transferFile->topLevelItem(index);
     statusTransfer=new QProgressBar();
     statusTransfer->setRange(0,100);
@@ -112,7 +112,7 @@ void MainWindow::showLoadTransferProgress(QString filesTransferInfo)
       ui->tw_fileImage->setEnabled(true);
    }*/
 
-    ui->progressBar->setRange(0,100);
+    // ui->progressBar->setRange(0,100);
     ui->progressBar->setValue(progress);
 
     qDebug()<<"Progresso geral= "<<progress;
@@ -184,6 +184,7 @@ void MainWindow::on_btn_transferImage_clicked()
     imageManager->sendImageUpload(listPN);
     ui->tw_fileImage->currentItem()->setSelected(false);
     ui->tw_fileImage->setEnabled(false);
+    ui->progressBar->setValue(0);
 }
 
 
