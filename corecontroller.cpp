@@ -2,14 +2,17 @@
 #include <unistd.h>
 #include "corecontroller.h"
 #include <pthread.h>
+#include <cjson/cJSON.h>
 
-struct upload_thr{
+#define FIND_STUB_FILE "/pes/findstub.json"
+
+struct upload_thr
+{
     CommunicationHandlerPtr comHandler;
     st_ui_image img_controler;
 };
 void *ptrUploadthread(void *ptr);
 
-using namespace std;
 CoreController::CoreController(QObject *parent)
     : QObject{parent}
 {
@@ -17,6 +20,51 @@ CoreController::CoreController(QObject *parent)
     ImageOperationResult rs =  create_handler(&imageHandler);
     create_handler(&comHandler);
     printf("%d",rs == IMAGE_OPERATION_OK);
+    homePath = string(getenv("HOME"));
+}
+
+void CoreController::parseFindStub()
+{
+    string findStubPath = homePath + "/" + FIND_STUB_FILE;
+    FILE *findStubFile = fopen(findStubPath.c_str(), "r");
+    if (findStubFile != NULL)
+    {
+        fseek(findStubFile, 0, SEEK_END);
+        size_t findStubFileSize = ftell(findStubFile);
+        rewind(findStubFile);
+
+        char *findStubFileContent = (char *)malloc(findStubFileSize + 1);
+        if (findStubFileContent != NULL)
+        {
+            size_t result = fread(findStubFileContent, 1, findStubFileSize, findStubFile);
+            if (result == findStubFileSize)
+            {
+
+                findStubFileContent[findStubFileSize] = '\0';
+
+                cJSON *config = cJSON_Parse(findStubFileContent);
+                if (config != NULL)
+                {
+                    cJSON *devices = cJSON_GetObjectItemCaseSensitive(config, "devices");
+                    if (devices != NULL)
+                    {
+                        cJSON *device = cJSON_GetArrayItem(devices, 0);
+                        if (device != NULL)
+                        {
+                            cJSON *ip = cJSON_GetObjectItemCaseSensitive(device, "ip");
+                            if (ip != NULL)
+                            {
+                                targetIp = string(ip->valuestring);
+                            }
+                        }
+                    }
+                }
+            }
+
+            free(findStubFileContent);
+        }
+        fclose(findStubFile);
+    }
 }
 
 void CoreController::start()
@@ -184,8 +232,11 @@ void CoreController::start()
                 // Set Target
                 set_target_hardware_id(comHandler, "HNPFMS");
                 set_target_hardware_pos(comHandler, "L");
-                set_target_hardware_ip(comHandler, "127.0.0.1");
 
+                targetIp = string("127.0.0.1"); // Default to localhost
+                parseFindStub();
+                qDebug() << "Target IP: " << targetIp.c_str();
+                set_target_hardware_ip(comHandler, targetIp.c_str());
                 printf("Num of Images: %d\r\n",img_controler.img_info.tam);
                 fflush(stdout);
                 Load *loads = (Load *)malloc((img_controler.img_info.tam+1)*sizeof(Load));
@@ -203,7 +254,7 @@ void CoreController::start()
                 set_load_list(comHandler, loads, img_controler.img_info.tam+1);
                 //                /* certificado */
                 Certificate certificate;
-                string str =  string(getenv("HOME")) + string("/pes/certificate/pescert.crt");
+                string str = homePath + string("/pes/certificate/pescert.crt");
                 strcpy(certificate.certificatePath, str.c_str());
                 set_certificate(comHandler, certificate);
 

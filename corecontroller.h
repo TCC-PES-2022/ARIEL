@@ -25,11 +25,16 @@ public slots:
     void start();                   // loop principal da coreController
 
 private:
+    void parseFindStub();
+
     bool isRun;                     // variável que controlar se a coreController está no loop principal ou não
     ImageHandlerPtr imageHandler;
     CommunicationHandlerPtr comHandler;
+
+    string homePath;
     char **images = NULL;
     int images_size = 0;
+    string targetIp;
 };
 
 
