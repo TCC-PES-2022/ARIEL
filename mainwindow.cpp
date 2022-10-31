@@ -17,12 +17,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     setUpInterface();
 
-    //Hide "Excluir" and "Status Geral" buttons
-    ui->btn_deleteImage->hide();
-    ui->pushButton_5->hide();
-
-    ui->btn_transferImage->setEnabled(false);
-
     //QObject::connect(&coreGUI_thread,&QThread::started,&coreGui,&CoreGUI::start);
 
     QObject::connect(ui->btn_cancelTransfer,SIGNAL(clicked()),this,SLOT(btn_cancelTransfer_cliked()));
@@ -51,6 +45,12 @@ void MainWindow::setUpInterface()
     ui->tw_fileImage->setHeaderLabels(labels);
     ui->progressBar->setRange(0,100);
     ui->progressBar->setValue(0);
+
+    //Hide "Excluir" and "Status Geral" buttons
+    ui->btn_deleteImage->hide();
+    ui->pushButton_5->hide();
+
+    ui->btn_transferImage->setEnabled(false);
     
     
     showImageFileList();
