@@ -48,6 +48,9 @@ border-top-color: rgb(0, 85, 255);</string>
     </property>
    </widget>
    <widget class="QPushButton" name="btn_login">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>200</x>
@@ -60,16 +63,29 @@ border-top-color: rgb(0, 85, 255);</string>
      <font>
       <family>Segoe UI</family>
       <pointsize>14</pointsize>
+      <weight>50</weight>
       <italic>false</italic>
       <bold>false</bold>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(0, 0, 255);
-border-radius:20px;
-font: 700 9pt &quot;Segoe UI&quot;;
-color: rgb(255, 255, 255);
-font: 14pt &quot;Segoe UI&quot;;
+     <string notr="true">QPushButton:enabled{
+	background-color: rgb(0, 0, 255);
+	border-radius:20px;
+	font: 700 9pt &quot;Segoe UI&quot;;
+	color: rgb(255, 255, 255);
+	font: 14pt &quot;Segoe UI&quot;;
+}
+
+QPushButton:disabled{
+	background-color: rgb(127, 127, 127);
+	border-radius:20px;
+	font: 700 9pt &quot;Segoe UI&quot;;
+	color: rgb(255, 255, 255);
+	font: 14pt &quot;Segoe UI&quot;;
+}
+
+
 </string>
     </property>
     <property name="text">
@@ -120,7 +136,7 @@ text-align: center;</string>
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>
