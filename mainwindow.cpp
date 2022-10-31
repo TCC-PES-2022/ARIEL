@@ -52,11 +52,12 @@ void MainWindow::setUpInterface()
 
     ui->btn_transferImage->setEnabled(false);
     ui->btn_cancelTransfer->setEnabled(false);
-    
+
+    //TODO: Add layout to a widget to show/hide both widgets at the same time
+    ui->label_3->hide();
+    ui->progressBar->hide();
     
     showImageFileList();
-
-
 
     ui->tw_transferFile->setColumnCount(3);
     QStringList labelsTransfer;
@@ -190,6 +191,8 @@ void MainWindow::on_btn_transferImage_clicked()
     ui->progressBar->setValue(0);
     ui->btn_transferImage->setEnabled(false);
     ui->btn_cancelTransfer->setEnabled(true);
+    ui->label_3->show();
+    ui->progressBar->show();
 }
 
 
@@ -252,6 +255,8 @@ void MainWindow::alertFailTransfer(unsigned char status)
     ui->tw_fileImage->setEnabled(true);
     ui->btn_cancelTransfer->setEnabled(false);
     ui->tw_transferFile->clear();
+    ui->label_3->hide();
+    ui->progressBar->hide();
 }
 
 
