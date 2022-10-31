@@ -161,6 +161,7 @@ void MainWindow::on_btn_transferImage_clicked()
     ui->tw_transferFile->clear();
 //    sendImageUpload( );
 
+    fileImageNameList.clear();
     foreach (int i, selectedFile) {
 
         if(i>=0){
