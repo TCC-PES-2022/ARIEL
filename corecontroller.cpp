@@ -251,7 +251,10 @@ void CoreController::start()
                 get_compatibility_path(imageHandler,img_controler.img_info.tabela_de_img,img_controler.img_info.tam,&cn);
                 strcpy(loads[img_controler.img_info.tam].partNumber, "00000000");
                 strcpy(loads[img_controler.img_info.tam].loadName, cn);
-                set_load_list(comHandler, loads, img_controler.img_info.tam+1);
+
+                set_load_list(comHandler, loads, img_controler.img_info.tam + 1);
+                // Content is copied in set_load_list, it is safe to free it
+                free(loads);
                 //                /* certificado */
                 Certificate certificate;
                 string str = homePath + string("/pes/certificate/pescert.crt");
