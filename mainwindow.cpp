@@ -51,6 +51,7 @@ void MainWindow::setUpInterface()
     ui->pushButton_5->hide();
 
     ui->btn_transferImage->setEnabled(false);
+    ui->btn_cancelTransfer->setEnabled(false);
     
     
     showImageFileList();
@@ -120,7 +121,6 @@ void MainWindow::showLoadTransferProgress(QString filesTransferInfo)
 
 void MainWindow::updateProgressTransfer(QString filesTransferInfo)
 {
-    showLoadTransferProgress(filesTransferInfo);
 
     int count=0;
     foreach (QString partnumber, fileImageNameList) {
@@ -130,6 +130,8 @@ void MainWindow::updateProgressTransfer(QString filesTransferInfo)
         updateProgressBarrTransferFile(count,loadRatio);
         count++;
     }
+
+    showLoadTransferProgress(filesTransferInfo);
 }
 
 void MainWindow::on_cBox_stateChanged(int state)
@@ -186,6 +188,8 @@ void MainWindow::on_btn_transferImage_clicked()
     ui->tw_fileImage->currentItem()->setSelected(false);
     ui->tw_fileImage->setEnabled(false);
     ui->progressBar->setValue(0);
+    ui->btn_transferImage->setEnabled(false);
+    ui->btn_cancelTransfer->setEnabled(true);
 }
 
 
@@ -193,7 +197,6 @@ void MainWindow::btn_cancelTransfer_cliked()
 {
    imageManager->cancelTransferFile();
    ui->tw_fileImage->setEnabled(true);
-   ui->tw_transferFile->clear();
 }
 
 
@@ -236,13 +239,19 @@ void MainWindow::updateProgressTransferList(char *json)
 
 void MainWindow::alertFailTransfer(unsigned char status)
 {
-     if(status==0){
-       QMessageBox msgBox;
-       msgBox.setText("Falha na transferência");
-       msgBox.exec();
-     }
-        ui->tw_fileImage->setEnabled(true);
-     
+    QMessageBox msgBox;
+    if (status == 0)
+    {
+        msgBox.setText("Falha na transferência");
+    }
+    else
+    {
+        msgBox.setText("Transferência realizada com sucesso");
+    }
+    msgBox.exec();
+    ui->tw_fileImage->setEnabled(true);
+    ui->btn_cancelTransfer->setEnabled(false);
+    ui->tw_transferFile->clear();
 }
 
 
