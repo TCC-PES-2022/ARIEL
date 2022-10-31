@@ -1,5 +1,6 @@
 #include "dialog_selectimage_file.h"
 #include "ui_dialog_selectimage_file.h"
+#include <QFileDialog>
 
 
 Dialog_selectImage_file::Dialog_selectImage_file(QWidget *parent) :
@@ -35,6 +36,7 @@ void Dialog_selectImage_file::setUpInterface()
 
 void Dialog_selectImage_file::on_btn_addImageFile_clicked()
 {
+#if 0
      fileManager=new Dialog_fileManager();
 
     fileManager->setTitle("Selecionar arquivo de imagem");
@@ -42,12 +44,17 @@ void Dialog_selectImage_file::on_btn_addImageFile_clicked()
     //fileManager->setIcon(QIcon(":/Ariel/img/Ariel/Icon.png"));
     QObject::connect(fileManager,&Dialog_fileManager::selectedFile,this,&Dialog_selectImage_file::updateArquivoSelected);
     fileManager->exec();
+#else
+    QString filePath = QFileDialog::getOpenFileName(this, tr("Open Image File"), "/", tr("Image Files (*.bin)"));
+    ui->txt_imageFile->setText(filePath);
+#endif
 
 }
 
 
 void Dialog_selectImage_file::on_btn_compatibilityFile_clicked()
 {
+#if 0
     fileManager=new Dialog_fileManager();
 
    fileManager->setTitle("Selecionar arquivo de compatibilidade");
@@ -55,6 +62,10 @@ void Dialog_selectImage_file::on_btn_compatibilityFile_clicked()
    //fileManager->setIcon(QIcon(":/Ariel/img/Ariel/Icon.png"));
    QObject::connect(fileManager,&Dialog_fileManager::selectedFile,this,&Dialog_selectImage_file::updateArquivoCompatibilitySelected);
    fileManager->exec();
+#else
+    QString filePath = QFileDialog::getOpenFileName(this, tr("Open Compatibility File"), "/", tr("Compatibility Files (*.xml)"));
+    ui->txt_compatibilityFile->setText(filePath);
+#endif
 
 }
 

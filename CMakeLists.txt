@@ -38,9 +38,6 @@ set(PROJECT_SOURCES
         dialog_selectimage_file.cpp
         dialog_selectimage_file.h
         dialog_selectimage_file.ui
-        dialog_filemanager.cpp
-        dialog_filemanager.h
-        dialog_filemanager.ui
         imagefileoperationmanager.cpp
         imagefileoperationmanager.h
         rsc_file.qrc

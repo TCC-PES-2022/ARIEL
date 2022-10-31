@@ -2,7 +2,7 @@
 #define DIALOG_SELECTIMAGE_FILE_H
 
 #include <QDialog>
-#include "dialog_filemanager.h"
+// #include "dialog_filemanager.h"
 
 namespace Ui {
 class Dialog_selectImage_file;
@@ -37,7 +37,7 @@ private slots:
 private:
     Ui::Dialog_selectImage_file *ui;
     void setUpInterface();
-    Dialog_fileManager *fileManager;
+    // Dialog_fileManager *fileManager;
 };
 
 #endif // DIALOG_SELECTIMAGE_FILE_H

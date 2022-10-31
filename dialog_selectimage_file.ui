@@ -13,6 +13,7 @@
   <property name="font">
    <font>
     <pointsize>12</pointsize>
+    <weight>75</weight>
     <bold>true</bold>
    </font>
   </property>
@@ -32,7 +33,7 @@
      <x>60</x>
      <y>130</y>
      <width>461</width>
-     <height>28</height>
+     <height>34</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -63,7 +64,7 @@ font: 700 10pt &quot;Segoe UI&quot;;</string>
      <x>120</x>
      <y>200</y>
      <width>321</width>
-     <height>28</height>
+     <height>34</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -99,7 +100,7 @@ font: 700 10pt &quot;Segoe UI&quot;;</string>
      <x>60</x>
      <y>90</y>
      <width>421</width>
-     <height>28</height>
+     <height>34</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout">
@@ -128,5 +129,22 @@ color: rgb(0, 0, 255);</string>
  <resources>
   <include location="rsc_file.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>btn_cancel</sender>
+   <signal>clicked()</signal>
+   <receiver>Dialog_selectImage_file</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>361</x>
+     <y>216</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>272</x>
+     <y>132</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
