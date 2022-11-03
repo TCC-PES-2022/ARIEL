@@ -22,7 +22,7 @@ Here are some basics for you to build and run this project on Ubuntu 22.04:
 
         chmod +x newuser.sh && ./newuser.sh <USER_NAME> <PASSWORD>
         
-* Ok, we're almost there. We now need to setup the [BLModule](https://github.com/TCC-PES-2022). 
+* Ok, we're almost there. We now need to setup the [BLModule](https://github.com/TCC-PES-2022/BLModule.git). 
 Follow the instructions on BLModule repository to build and run it.
 
 * At last, we're ready to run ARIEL. Just run the following command:
