@@ -10,6 +10,7 @@ struct upload_thr
 {
     CommunicationHandlerPtr comHandler;
     st_ui_image img_controler;
+    st_ui_aut aut_controler;
 };
 void *ptrUploadthread(void *ptr);
 
@@ -19,7 +20,7 @@ CoreController::CoreController(QObject *parent)
     qInfo()<<"controlador criado";
     ImageOperationResult rs =  create_handler(&imageHandler);
     create_handler(&comHandler);
-    printf("%d",rs == IMAGE_OPERATION_OK);
+//    printf("%d",rs == IMAGE_OPERATION_OK);
     homePath = string(getenv("HOME"));
 }
 
@@ -138,17 +139,17 @@ void CoreController::start()
         case RP_fila_imagem:
             if(img_controler.byte_controle == UI_Carregar_Imagem)
             {
-                printf("Print Ptr imgPATH CTRL\r\n");
-                printf("%s \r\n",(char*)img_controler.dir_img.diretorio_img);
-                printf("Print Ptr cmpPATH CTRL\r\n");
-                printf("%s \r\n",(char*)img_controler.dir_img.diretorio_cmp);
+//                printf("Print Ptr imgPATH CTRL\r\n");
+//                printf("%s \r\n",(char*)img_controler.dir_img.diretorio_img);
+//                printf("Print Ptr cmpPATH CTRL\r\n");
+//                printf("%s \r\n",(char*)img_controler.dir_img.diretorio_cmp);
 
                 char *pn; // TODO - ADICIONAR PN NA RESPOSTA
                 ImageOperationResult result = import_image(imageHandler,(char*)img_controler.dir_img.diretorio_img,&pn);
                 result = import_image(imageHandler,(char*)img_controler.dir_img.diretorio_cmp,NULL);
 
-                printf("Print PARTNUMBER CTRL\r\n");
-                printf("%s \r\n",(char*)pn);
+//                printf("Print PARTNUMBER CTRL\r\n");
+//                printf("%s \r\n",(char*)pn);
 
 
                 if(result == IMAGE_OPERATION_OK)
@@ -173,11 +174,11 @@ void CoreController::start()
                 //TODO - Rotina para listar as imagens
 
                 ImageOperationResult result = get_images(imageHandler,&img_controler.img_info.tabela_de_img,&img_controler.img_info.tam);
-                printf("/r/n %d /r/n",img_controler.img_info.tam);
-                for (int i = 0; i< img_controler.img_info.tam;i++)
-                {
-                    printf("/r/n BIN: %s /r/n",(char*)img_controler.img_info.tabela_de_img[i]);
-                }
+//                printf("/r/n %d /r/n",img_controler.img_info.tam);
+//                for (int i = 0; i< img_controler.img_info.tam;i++)
+//                {
+//                    printf("/r/n BIN: %s /r/n",(char*)img_controler.img_info.tabela_de_img[i]);
+//                }
                 // img_controler.img_info.tabela_de_img <- Maximo de 10 strings por envio
                 // img_controler.img_info.quantidade_de_imagens_total <- quantidade de PNs existeentes
                 // img_controler.img_info.offset_imagens <- Posição da lista de PNs a ser enviada
@@ -205,6 +206,8 @@ void CoreController::start()
         case RP_fila_transf_imagem:
             if (img_controler.byte_controle == UI_Iniciar_Transferencia)
             {
+               logger(LG_IMAGE,"%s;%s;",(char*)aut_controler.autenticao.login,"Transferencia iniciada");
+
                // if(img_controler.img_info.tam == 0)
                // {
                //     img_controler =*transferir_imagem_Controler(UI_Falha,&img_controler);
@@ -267,7 +270,7 @@ void CoreController::start()
 
                 tmp->comHandler = comHandler;
                 tmp->img_controler = img_controler;
-
+                tmp->aut_controler = aut_controler;
                 pthread_t tmp2;
                 pthread_create(&tmp2, NULL, ptrUploadthread, tmp);
                 pthread_detach(tmp2);
@@ -276,6 +279,7 @@ void CoreController::start()
             else if (img_controler.byte_controle == UI_Cancelar)
             {
                 abort_upload(comHandler,OPERATION_ABORTED_BY_THE_OPERATOR);
+                logger(LG_IMAGE,"%s;%s;",(char*)aut_controler.autenticao.login,"Transferencia cancelada");
 
                //img_controler =*transferir_imagem_Controler(UI_Ok,&img_controler);
             }
@@ -296,5 +300,12 @@ void *ptrUploadthread(void *ptr)
     CommunicationOperationResult result = upload(tmp->comHandler);
     tmp->img_controler.img_transf.status_transf = (result == COMMUNICATION_OPERATION_OK);
     tmp->img_controler =*transferir_imagem_Controler(UI_Fim_Transferencia,&tmp->img_controler);
+    if(result == COMMUNICATION_OPERATION_OK){
+        logger(LG_IMAGE,"%s;%s;",(char*)tmp->aut_controler.autenticao.login,"Transferencia Finalizada");
+    }
+    else
+    {
+      logger(LG_IMAGE,"%s;%s;",(char*)tmp->aut_controler.autenticao.login,"Transferencia Não Finalizada");
+    }
     free(tmp);
 }
