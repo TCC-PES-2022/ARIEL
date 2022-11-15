@@ -46,6 +46,9 @@ mkdir -p $INSTALL_PATH/certificate
 cd ../..
 cp certificate/* $INSTALL_PATH/certificate
 
+# Install findstub
+cp findstub.json $INSTALL_PATH
+
 # Create log directory
 mkdir -p $INSTALL_PATH/log
 

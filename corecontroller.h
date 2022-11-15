@@ -35,6 +35,7 @@ private:
     char **images = NULL;
     int images_size = 0;
     string targetIp;
+    unsigned short targetPort;
 };
 
 

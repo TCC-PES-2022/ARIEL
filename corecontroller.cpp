@@ -57,6 +57,11 @@ void CoreController::parseFindStub()
                             {
                                 targetIp = string(ip->valuestring);
                             }
+                            cJSON *port = cJSON_GetObjectItemCaseSensitive(device, "port");
+                            if (port != NULL)
+                            {
+                                targetPort = port->valueint;
+                            }
                         }
                     }
                 }
@@ -237,9 +242,12 @@ void CoreController::start()
                 set_target_hardware_pos(comHandler, "L");
 
                 targetIp = string("127.0.0.1"); // Default to localhost
+                targetPort = 59595;		// Default to 59595
                 parseFindStub();
                 qDebug() << "Target IP: " << targetIp.c_str();
+                qDebug() << "Target Port: " << targetPort;
                 set_target_hardware_ip(comHandler, targetIp.c_str());
+                set_tftp_targethardware_server_port(comHandler, targetPort);
                 printf("Num of Images: %d\r\n",img_controler.img_info.tam);
                 fflush(stdout);
                 Load *loads = (Load *)malloc((img_controler.img_info.tam+1)*sizeof(Load));
