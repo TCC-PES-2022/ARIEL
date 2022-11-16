@@ -120,6 +120,26 @@ void MainWindow::showLoadTransferProgress(QString filesTransferInfo)
     qDebug()<<"Progresso geral= "<<progress;
 }
 
+int MainWindow::countSelectedImage(QVector<int> listSelectedImage)
+{
+    int sizeElementSelected=0;
+    foreach (int i, listSelectedImage) {
+        if(i!=-1){
+            sizeElementSelected++;
+        }
+    }
+
+    return sizeElementSelected;
+}
+
+void MainWindow::unSelectedQBoxItem(int indeOfElement)
+{
+   QTreeWidgetItem *treeItem=ui->tw_fileImage->topLevelItem(indeOfElement);
+   cBox=new QCheckBox();
+   QObject::connect(cBox,&QCheckBox::stateChanged,this,&MainWindow::on_cBox_stateChanged);
+   ui->tw_fileImage->setItemWidget(treeItem,0,cBox);
+}
+
 void MainWindow::updateProgressTransfer(QString filesTransferInfo)
 {
 
@@ -138,22 +158,33 @@ void MainWindow::updateProgressTransfer(QString filesTransferInfo)
 void MainWindow::on_cBox_stateChanged(int state)
 {
 
-    int currentItem=ui->tw_fileImage->indexOfTopLevelItem(ui->tw_fileImage->currentItem());
-    if(state == 2){
-        selectedFile.replace(currentItem,currentItem);
-    }else{
-        selectedFile.replace(currentItem,-1);
-    }
+    int elementSize=countSelectedImage(selectedFile);
+    qDebug()<<"Number of selectedFile["<<elementSize;
 
-    bool enableButton=false;
-    for (int i = 0; i < selectedFile.size(); ++i) {
-        qDebug()<<"selectedFile["<<i<<"]="<<selectedFile[i];
-        if(selectedFile.at(i)!=-1){
-            enableButton=true;
-            break;
+    int currentItem=ui->tw_fileImage->indexOfTopLevelItem(ui->tw_fileImage->currentItem());
+        if(state == 2){
+            if(elementSize<9){
+            selectedFile.replace(currentItem,currentItem);
+            }else{
+                unSelectedQBoxItem(currentItem);
+                QMessageBox msgBox;
+                msgBox.setText("Somente 9 arquivo pode ser selecionado de uma vez");
+                msgBox.exec();
+            }
+        }else{
+            selectedFile.replace(currentItem,-1);
         }
-    }
-    ui->btn_transferImage->setEnabled(enableButton);
+
+        bool enableButton=false;
+        for (int i = 0; i < selectedFile.size(); ++i) {
+            //qDebug()<<"selectedFile["<<i<<"]="<<selectedFile[i];
+            if(selectedFile.at(i)!=-1){
+                enableButton=true;
+                break;
+            }
+        }
+        ui->btn_transferImage->setEnabled(enableButton);
+
 }
 
 
@@ -191,6 +222,7 @@ void MainWindow::on_btn_transferImage_clicked()
     ui->progressBar->setValue(0);
     ui->btn_transferImage->setEnabled(false);
     ui->btn_cancelTransfer->setEnabled(true);
+    ui->btn_addImage->setEnabled(false);
     ui->label_3->show();
     ui->progressBar->show();
 }
@@ -257,6 +289,9 @@ void MainWindow::alertFailTransfer(unsigned char status)
     ui->tw_transferFile->clear();
     ui->label_3->hide();
     ui->progressBar->hide();
+
+    ui->btn_addImage->setEnabled(true);
+
 }
 
 

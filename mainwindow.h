@@ -5,6 +5,7 @@
 #include <QTreeWidgetItem>
 #include <QCheckBox>
 #include <QProgressBar>
+#include <QVector>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -44,6 +45,8 @@ private:
     void createItemTransferFile(QString partNumber, QString TargetHardware);
     void updateProgressBarrTransferFile(int index,double valor);
     void showLoadTransferProgress(QString filesTransferInfo);
+    int countSelectedImage(QVector<int> listSelectedImage);
+    void unSelectedQBoxItem(int indeOfElement);
 public:
     void updateProgressTransfer(QString filesTransferInfo);
 
