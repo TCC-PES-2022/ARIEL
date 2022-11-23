@@ -41,6 +41,12 @@ set(PROJECT_SOURCES
         imagefileoperationmanager.cpp
         imagefileoperationmanager.h
         rsc_file.qrc
+        dialog_warning.cpp
+        dialog_warning.h
+        dialog_warning.ui
+        dialog_success.cpp
+        dialog_success.h
+        dialog_success.ui
 
 )
 

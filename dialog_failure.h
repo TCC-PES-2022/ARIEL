@@ -14,6 +14,7 @@ class Dialog_failure : public QDialog
 public:
     explicit Dialog_failure(QWidget *parent = nullptr);
     ~Dialog_failure();
+    void showUp(QString title,QString mensage);
 
 private slots:
     void on_btn_ok_clicked();
