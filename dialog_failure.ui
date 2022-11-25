@@ -86,10 +86,10 @@ font: 700 14pt &quot;Segoe UI&quot;;</string>
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QLabel" name="lb_msg">
+   <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>40</x>
       <y>110</y>
       <width>411</width>
       <height>31</height>

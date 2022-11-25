@@ -6,9 +6,6 @@
 #include <QCheckBox>
 #include <QProgressBar>
 #include <QVector>
-#include <dialog_warning.h>
-#include <dialog_failure.h>
-#include <dialog_success.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -50,9 +47,6 @@ private:
     void showLoadTransferProgress(QString filesTransferInfo);
     int countSelectedImage(QVector<int> listSelectedImage);
     void unSelectedQBoxItem(int indeOfElement);
-    void showWarningMensagem(QString title, QString mensage);
-    void showFailureMensagem(QString title, QString mensage);
-    void showSuccessMensagem(QString title, QString mensage);
 public:
     void updateProgressTransfer(QString filesTransferInfo);
 
@@ -60,9 +54,6 @@ private:
     Ui::MainWindow *ui;
     QCheckBox *cBox;
     QProgressBar *statusTransfer;
-    Dialog_warning *dialog_warning;
-    Dialog_failure *dialog_failure;
-    Dialog_success *dialog_success;
 
 };
 #endif // MAINWINDOW_H

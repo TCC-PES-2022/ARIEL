@@ -13,14 +13,6 @@ Dialog_failure::~Dialog_failure()
     delete ui;
 }
 
-void Dialog_failure::showUp(QString title, QString mensage)
-{
-    ui->lb_msg->setText(mensage);
-    this->setWindowTitle(title);
-    ui->lb_msg->setAlignment(Qt::AlignCenter);
-    this->show();
-}
-
 void Dialog_failure::on_btn_ok_clicked()
 {
     this->close();

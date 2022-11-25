@@ -16,6 +16,9 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     setUpInterface();
+
+    //QObject::connect(&coreGUI_thread,&QThread::started,&coreGui,&CoreGUI::start);
+
     QObject::connect(ui->btn_cancelTransfer,SIGNAL(clicked()),this,SLOT(btn_cancelTransfer_cliked()));
 }
 
@@ -93,6 +96,7 @@ void MainWindow::createItemTransferFile(QString partNumber, QString TargetHardwa
 void MainWindow::updateProgressBarrTransferFile(int index, double valor)
 {
 
+    // ui->progressBar->setValue(0);
     QTreeWidgetItem *treeItem=ui->tw_transferFile->topLevelItem(index);
     statusTransfer=new QProgressBar();
     statusTransfer->setRange(0,100);
@@ -104,7 +108,16 @@ void MainWindow::updateProgressBarrTransferFile(int index, double valor)
 void MainWindow::showLoadTransferProgress(QString filesTransferInfo)
 {
     double progress=imageManager->getLoadListRatio(filesTransferInfo);
+
+   /*if(progress==100){
+      
+      ui->tw_fileImage->setEnabled(true);
+   }*/
+
+    // ui->progressBar->setRange(0,100);
     ui->progressBar->setValue(progress);
+
+    qDebug()<<"Progresso geral= "<<progress;
 }
 
 int MainWindow::countSelectedImage(QVector<int> listSelectedImage)
@@ -127,24 +140,6 @@ void MainWindow::unSelectedQBoxItem(int indeOfElement)
    ui->tw_fileImage->setItemWidget(treeItem,0,cBox);
 }
 
-void MainWindow::showWarningMensagem(QString title, QString mensage)
-{
-      dialog_warning=new Dialog_warning();
-      dialog_warning->showUp(title,mensage);
-}
-
-void MainWindow::showFailureMensagem(QString title, QString mensage)
-{
-    dialog_failure=new Dialog_failure();
-    dialog_failure->showUp(title,mensage);
-}
-
-void MainWindow::showSuccessMensagem(QString title, QString mensage)
-{
-    dialog_success=new Dialog_success();
-    dialog_success->showUp(title,mensage);
-}
-
 void MainWindow::updateProgressTransfer(QString filesTransferInfo)
 {
 
@@ -152,6 +147,7 @@ void MainWindow::updateProgressTransfer(QString filesTransferInfo)
     foreach (QString partnumber, fileImageNameList) {
 
         double loadRatio=imageManager->getLoadFileRatio(partnumber,filesTransferInfo);
+        qDebug() << "\n loadRatio: " << loadRatio << "PartNumber: "<< partnumber;
         updateProgressBarrTransferFile(count,loadRatio);
         count++;
     }
@@ -163,13 +159,17 @@ void MainWindow::on_cBox_stateChanged(int state)
 {
 
     int elementSize=countSelectedImage(selectedFile);
-        int currentItem=ui->tw_fileImage->indexOfTopLevelItem(ui->tw_fileImage->currentItem());
+    qDebug()<<"Number of selectedFile["<<elementSize;
+
+    int currentItem=ui->tw_fileImage->indexOfTopLevelItem(ui->tw_fileImage->currentItem());
         if(state == 2){
             if(elementSize<9){
             selectedFile.replace(currentItem,currentItem);
             }else{
                 unSelectedQBoxItem(currentItem);
-                this->showWarningMensagem("Seleção inválida","No máximo 9 arquivos podem ser selecionados!");
+                QMessageBox msgBox;
+                msgBox.setText("Somente 9 arquivo pode ser selecionado de uma vez");
+                msgBox.exec();
             }
         }else{
             selectedFile.replace(currentItem,-1);
@@ -177,7 +177,7 @@ void MainWindow::on_cBox_stateChanged(int state)
 
         bool enableButton=false;
         for (int i = 0; i < selectedFile.size(); ++i) {
-
+            //qDebug()<<"selectedFile["<<i<<"]="<<selectedFile[i];
             if(selectedFile.at(i)!=-1){
                 enableButton=true;
                 break;
@@ -193,6 +193,8 @@ void MainWindow::on_btn_transferImage_clicked()
     QStringList listPN;
 
     ui->tw_transferFile->clear();
+//    sendImageUpload( );
+
     fileImageNameList.clear();
     foreach (int i, selectedFile) {
 
@@ -202,7 +204,7 @@ void MainWindow::on_btn_transferImage_clicked()
             QObject::connect(cBox,&QCheckBox::stateChanged,this,&MainWindow::on_cBox_stateChanged);
             ui->tw_fileImage->setItemWidget(treeItem,0,cBox);
             if(selectedFile.at(i) != -1){
-
+//                fileImageNameList.append()
             }
             selectedFile.replace(i,-1);
             QString nameFile=treeItem->text(1);
@@ -272,19 +274,22 @@ void MainWindow::updateProgressTransferList(char *json)
 
 void MainWindow::alertFailTransfer(unsigned char status)
 {
-
-    if (status == 0){
-      showFailureMensagem("Operação de transferência","Falha na transferência!");
+    QMessageBox msgBox;
+    if (status == 0)
+    {
+        msgBox.setText("Falha na transferência");
     }
-    else{
-       showSuccessMensagem("Operação de transferência","Transferência Realizada com sucesso!");
+    else
+    {
+        msgBox.setText("Transferência realizada com sucesso");
     }
-
+    msgBox.exec();
     ui->tw_fileImage->setEnabled(true);
     ui->btn_cancelTransfer->setEnabled(false);
     ui->tw_transferFile->clear();
     ui->label_3->hide();
     ui->progressBar->hide();
+
     ui->btn_addImage->setEnabled(true);
 
 }
@@ -295,10 +300,12 @@ void MainWindow::updateInterfaceImage(char **images, int tam)
 {
     ui->tw_fileImage->clear();
     selectedFile.clear();
+//    fileImageNameList.clear();
     for (int i = 0; i< tam;i++)
         {
             QString partNumber = QString::fromUtf8((char*)images[i]);
             createItemFile(partNumber);
+//            fileImageNameList.append(partNumber);
             selectedFile.push_back(-1);
         }
 }

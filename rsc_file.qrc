@@ -5,8 +5,6 @@
         <file>img/icon/Icon_xml.png</file>
         <file>img/icon/uploadFileIcon.png</file>
         <file>img/icon/failure_icon.png</file>
-        <file>img/icon/warningIcon.png</file>
-        <file>img/icon/sucessIcon.png</file>
     </qresource>
     <qresource prefix="/Ariel">
         <file>img/Ariel/Alt5.png</file>
