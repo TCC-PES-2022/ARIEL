@@ -69,6 +69,6 @@ void CoreGUI::start()
             std::cout << "+[GUI] Cmd Anterior " << unsigned(con_gui.byte_controle_anterior) << endl;
         }
 
-        sleep(1);
+        usleep(100000);
     }
 }
